@@ -9,6 +9,8 @@ import {
 // Values
 pub fn[T] multiple(() -> T raise, count? : Int) -> Array[T] raise
 
+pub fn mustache(String, Map[String, () -> String raise]) -> String raise
+
 pub fn slugify(String) -> String
 
 // Errors
@@ -61,6 +63,7 @@ pub fn Currency::to_json(Self) -> Json
 pub struct Faker {
   randomizer : @randomizer.Randomizer
   locales : Array[@locale.Locale]
+  mut template_depth : Int
 }
 pub fn Faker::airline_airline(Self) -> Airline raise
 pub fn Faker::airline_airplane(Self) -> Airplane raise
@@ -99,23 +102,31 @@ pub fn Faker::color_space(Self) -> String raise
 pub fn Faker::commerce_department(Self) -> String raise
 pub fn Faker::commerce_product(Self) -> String raise
 pub fn Faker::commerce_product_adjective(Self) -> String raise
+pub fn Faker::commerce_product_description(Self) -> String raise
 pub fn Faker::commerce_product_material(Self) -> String raise
+pub fn Faker::commerce_product_name(Self) -> String raise
 pub fn Faker::company_buzz_adjective(Self) -> String raise
 pub fn Faker::company_buzz_noun(Self) -> String raise
+pub fn Faker::company_buzz_phrase(Self) -> String raise
 pub fn Faker::company_buzz_verb(Self) -> String raise
+pub fn Faker::company_catch_phrase(Self) -> String raise
 pub fn Faker::company_catch_phrase_adjective(Self) -> String raise
 pub fn Faker::company_catch_phrase_descriptor(Self) -> String raise
 pub fn Faker::company_catch_phrase_noun(Self) -> String raise
+pub fn Faker::company_name(Self) -> String raise
 pub fn Faker::database_collation(Self) -> String raise
 pub fn Faker::database_column(Self) -> String raise
 pub fn Faker::database_engine(Self) -> String raise
 pub fn Faker::database_type(Self) -> String raise
 pub fn Faker::date_time_zone(Self) -> String raise
 pub fn Faker::definition(Self, String) -> Json raise
+pub fn Faker::fake(Self, String) -> String raise
 pub fn Faker::finance_currency(Self) -> Currency raise
 pub fn Faker::finance_transaction_type(Self) -> String raise
 pub fn Faker::float(Self, min? : Double, max? : Double, multiple_of? : Double, fraction_digits? : Int) -> Double raise
 pub fn Faker::food_adjective(Self) -> String raise
+pub fn Faker::food_description(Self) -> String raise
+pub fn Faker::food_dish(Self) -> String raise
 pub fn Faker::food_ethnic_category(Self) -> String raise
 pub fn Faker::food_fruit(Self) -> String raise
 pub fn Faker::food_ingredient(Self) -> String raise
@@ -127,16 +138,40 @@ pub fn Faker::hacker_abbreviation(Self) -> String raise
 pub fn Faker::hacker_adjective(Self) -> String raise
 pub fn Faker::hacker_ingverb(Self) -> String raise
 pub fn Faker::hacker_noun(Self) -> String raise
+pub fn Faker::hacker_phrase(Self) -> String raise
 pub fn Faker::hacker_verb(Self) -> String raise
 pub fn Faker::hexadecimal(Self, length? : Int, prefix? : String, casing? : Casing) -> String raise
 pub fn Faker::int(Self, min? : Int, max? : Int, multiple_of? : Int) -> Int raise
 pub fn Faker::internet_domain_suffix(Self) -> String raise
 pub fn Faker::internet_jwt_algorithm(Self) -> String raise
+pub fn Faker::location_building_number(Self) -> String raise
+pub fn Faker::location_cardinal_direction(Self, abbreviated? : Bool) -> String raise
+pub fn Faker::location_city(Self) -> String raise
 pub fn Faker::location_continent(Self) -> String raise
 pub fn Faker::location_country(Self) -> String raise
+pub fn Faker::location_country_code(Self, variant? : String) -> String raise
 pub fn Faker::location_county(Self) -> String raise
+pub fn Faker::location_direction(Self, abbreviated? : Bool) -> String raise
 pub fn Faker::location_language(Self) -> Language raise
+pub fn Faker::location_latitude(Self, min? : Double, max? : Double, precision? : Int) -> Double raise
+pub fn Faker::location_longitude(Self, min? : Double, max? : Double, precision? : Int) -> Double raise
+pub fn Faker::location_ordinal_direction(Self, abbreviated? : Bool) -> String raise
+pub fn Faker::location_postal_address(Self) -> String raise
+pub fn Faker::location_secondary_address(Self) -> String raise
+pub fn Faker::location_state(Self, abbreviated? : Bool) -> String raise
+pub fn Faker::location_street(Self) -> String raise
+pub fn Faker::location_street_address(Self, full? : Bool) -> String raise
 pub fn Faker::location_time_zone(Self) -> String raise
+pub fn Faker::location_zip_code(Self, format? : String, state? : String) -> String raise
+pub fn Faker::lorem_lines(Self, count? : Int) -> String raise
+pub fn Faker::lorem_paragraph(Self, count? : Int) -> String raise
+pub fn Faker::lorem_paragraphs(Self, count? : Int, separator? : String) -> String raise
+pub fn Faker::lorem_sentence(Self, count? : Int) -> String raise
+pub fn Faker::lorem_sentences(Self, count? : Int, separator? : String) -> String raise
+pub fn Faker::lorem_slug(Self, count? : Int) -> String raise
+pub fn Faker::lorem_text(Self) -> String raise
+pub fn Faker::lorem_word(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
+pub fn Faker::lorem_words(Self, count? : Int) -> String raise
 pub fn[T] Faker::maybe(Self, () -> T raise, probability? : Double) -> T? raise
 pub fn Faker::medical_allergen(Self) -> String raise
 pub fn Faker::medical_blood_type(Self) -> String raise
@@ -157,11 +192,19 @@ pub fn Faker::number_hex(Self, min? : Int, max? : Int) -> String raise
 pub fn Faker::number_octal(Self, min? : Int, max? : Int) -> String raise
 pub fn Faker::numeric(Self, length? : Int, allow_leading_zeros? : Bool, exclude? : String) -> String raise
 pub fn Faker::octal(Self, length? : Int, prefix? : String) -> String raise
+pub fn Faker::person_bio(Self) -> String raise
+pub fn Faker::person_first_name(Self, sex? : Sex) -> String raise
+pub fn Faker::person_full_name(Self, first_name? : String, last_name? : String, sex? : Sex) -> String raise
 pub fn Faker::person_gender(Self) -> String raise
 pub fn Faker::person_job_area(Self) -> String raise
 pub fn Faker::person_job_descriptor(Self) -> String raise
+pub fn Faker::person_job_title(Self) -> String raise
 pub fn Faker::person_job_type(Self) -> String raise
+pub fn Faker::person_last_name(Self, sex? : Sex) -> String raise
+pub fn Faker::person_middle_name(Self, sex? : Sex) -> String raise
+pub fn Faker::person_prefix(Self, sex? : Sex) -> String raise
 pub fn Faker::person_sex(Self) -> String raise
+pub fn Faker::person_sex_type(Self, include_generic? : Bool) -> Sex raise
 pub fn Faker::person_suffix(Self) -> String raise
 pub fn Faker::person_zodiac_sign(Self) -> String raise
 pub fn Faker::random(Self) -> Double
@@ -180,11 +223,22 @@ pub fn[T : Eq] Faker::unique_array(Self, ArrayView[T], Int) -> Array[T] raise
 pub fn Faker::uuid(Self) -> String raise
 pub fn Faker::uuid_v7(Self, Int64) -> String raise
 pub fn Faker::vehicle_bicycle(Self) -> String raise
+pub fn Faker::vehicle_color(Self) -> String raise
 pub fn Faker::vehicle_fuel(Self) -> String raise
 pub fn Faker::vehicle_manufacturer(Self) -> String raise
 pub fn Faker::vehicle_model(Self) -> String raise
 pub fn Faker::vehicle_type(Self) -> String raise
+pub fn Faker::vehicle_vehicle(Self) -> String raise
 pub fn[T] Faker::weighted_array_element(Self, ArrayView[(Double, T)]) -> T raise
+pub fn Faker::word_adjective(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_adverb(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_conjunction(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_interjection(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_noun(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_preposition(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_sample(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_verb(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_words(Self, count? : Int) -> String raise
 
 pub struct Language {
   name : String
@@ -193,11 +247,25 @@ pub struct Language {
 } derive(ToJson)
 pub fn Language::to_json(Self) -> Json
 
+pub(all) enum LengthStrategy {
+  Fail
+  Closest
+  Shortest
+  Longest
+  AnyLength
+}
+
 pub struct ScienceUnit {
   name : String
   symbol : String
 } derive(ToJson)
 pub fn ScienceUnit::to_json(Self) -> Json
+
+pub(all) enum Sex {
+  Female
+  Male
+  Generic
+}
 
 // Type aliases
 pub using @locale {type Locale}

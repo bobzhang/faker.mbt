@@ -17,6 +17,7 @@ pub suberror FakerError {
 pub struct Faker {
   randomizer : Randomizer
   locales : Array[Locale]
+  mut template_depth : Int32
 }
 
 ///|
@@ -30,6 +31,7 @@ pub fn Faker::new(
   {
     randomizer: randomizer.unwrap_or_else(() => Randomizer::new(seed~)),
     locales: locales.copy(),
+    template_depth: 0,
   }
 }
 
