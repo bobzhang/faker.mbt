@@ -160,3 +160,48 @@ pub fn slugify(value : String) -> String {
   }
   out.to_string()
 }
+
+///|
+pub fn[T] Faker::object_key(
+  self : Faker,
+  values : Map[String, T],
+) -> String raise {
+  self.array_element(values.keys().to_array())
+}
+
+///|
+pub fn[T] Faker::object_value(self : Faker, values : Map[String, T]) -> T raise {
+  values[self.object_key(values)]
+}
+
+///|
+pub fn[T] Faker::object_entry(
+  self : Faker,
+  values : Map[String, T],
+) -> (String, T) raise {
+  let key = self.object_key(values)
+  (key, values[key])
+}
+
+///|
+/// Supply the enum's possible values explicitly in MoonBit.
+pub fn[T] Faker::enum_value(self : Faker, variants : ArrayView[T]) -> T raise {
+  self.array_element(variants)
+}
+
+///|
+pub(all) enum NumberOrRange {
+  Fixed(Int32)
+  Range(min~ : Int32, max~ : Int32)
+}
+
+///|
+pub fn Faker::range_to_number(
+  self : Faker,
+  range : NumberOrRange,
+) -> Int32 raise {
+  match range {
+    Fixed(n) => n
+    Range(min~, max~) => self.int(min~, max~)
+  }
+}

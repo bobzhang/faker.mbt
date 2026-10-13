@@ -151,3 +151,25 @@ fixtures('finance_parity_test.mbt', [
  ['f.from_reg_exp("[A-Z]{2}[0-9]{4,8}W{0,1}")', f=>f.helpers.fromRegExp('[A-Z]{2}[0-9]{4,8}W{0,1}')],
  ['f.from_reg_exp("[A-D]{3}x?", ignore_case=true)', f=>f.helpers.fromRegExp(/[A-D]{3}x?/i)],
 ]);
+fixtures('color_image_parity_test.mbt', [
+ ['f.color_rgb()', f=>f.color.rgb()],
+ ['f.color_rgb_channels(include_alpha=true)', f=>f.color.rgb({format:'decimal',includeAlpha:true})],
+ ...['cmyk','hsl','hwb','lab','lch'].map(name=>[`f.color_${name}()`,f=>f.color[name]()]),
+ ['f.color_by_css_color_space()', f=>f.color.colorByCSSColorSpace()],
+ ['@faker.color_css(f.color_hsl(include_alpha=true), model="hsla")', f=>f.color.hsl({format:'css',includeAlpha:true})],
+ ['@faker.color_binary(f.color_lch())', f=>f.color.lch({format:'binary'})],
+ ['f.image_avatar()', f=>f.image.avatar()],
+ ['f.image_url()', f=>f.image.url()],
+ ['f.image_url_picsum_photos()', f=>f.image.urlPicsumPhotos()],
+ ['f.image_data_uri()', f=>f.image.dataUri()],
+ ['f.big_int()', f=>f.number.bigInt().toString()],
+ ['f.big_int(min=-100000000000000000000N, max=100000000000000000000N, multiple_of=13N)', f=>f.number.bigInt({min:-100000000000000000000n,max:100000000000000000000n,multipleOf:13n}).toString()],
+ ['f.location_nearby_gps_coordinate(origin=(33.0, -170.0))', f=>f.location.nearbyGPSCoordinate({origin:[33,-170]})],
+ ['f.finance_transaction_description()', f=>f.finance.transactionDescription()],
+]);
+fixtures('remaining_parity_test.mbt', [
+ ['f.git_commit_date()', f=>f.git.commitDate({refDate:1577836800000})],
+ ['f.git_commit_entry()', f=>f.git.commitEntry({refDate:1577836800000})],
+ ['f.internet_jwt()', f=>f.internet.jwt({refDate:1577836800000})],
+ ['f.object_entry({"a": 1, "b": 2, "c": 3})', f=>f.helpers.objectEntry({a:1,b:2,c:3})],
+]);

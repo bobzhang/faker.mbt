@@ -6,6 +6,7 @@ pub fn Faker::int(
   min~ : Int32 = 0,
   max~ : Int32 = 2147483647,
   multiple_of~ : Int32 = 1,
+  distributor? : (Randomizer) -> Double,
 ) -> Int32 raise {
   guard multiple_of > 0 else {
     raise InvalidArgument("multiple_of must be positive")
@@ -18,7 +19,7 @@ pub fn Faker::int(
   let value = if low == high {
     low
   } else {
-    (self.random() * (high - low + 1) + low).floor()
+    (self.distributed(distributor) * (high - low + 1) + low).floor()
   }
   (value * multiple_of.to_double()).to_int()
 }
@@ -30,6 +31,7 @@ pub fn Faker::float(
   max~ : Double = 1,
   multiple_of? : Double,
   fraction_digits? : Int32,
+  distributor? : (Randomizer) -> Double,
 ) -> Double raise {
   guard !min.is_nan() &&
     !max.is_nan() &&
@@ -52,12 +54,17 @@ pub fn Faker::float(
     (step, None) => step
   }
   match step {
-    None => self.random() * (max - min) + min
+    None => self.distributed(distributor) * (max - min) + min
     Some(step) => {
       guard step > 0 && !step.is_inf() else {
         raise InvalidArgument("multiple_of must be finite and positive")
       }
-      let factor = 1.0 / step
+      let logarithm = @math.log10(step)
+      let factor = if step < 1 && logarithm == logarithm.floor() {
+        @math.pow(10, -logarithm)
+      } else {
+        1.0 / step
+      }
       let low = (min * factor).ceil()
       let high = (max * factor).floor()
       guard low <= high &&
@@ -68,7 +75,7 @@ pub fn Faker::float(
       (if low == high {
         low
       } else {
-        (self.random() * (high - low + 1) + low).floor()
+        (self.distributed(distributor) * (high - low + 1) + low).floor()
       }) /
       factor
     }
@@ -149,4 +156,30 @@ pub fn Faker::roman_numeral(
     }
   }
   out.to_string()
+}
+
+///|
+/// Arbitrary-precision generator preserving Faker's decimal/modulo algorithm.
+pub fn Faker::big_int(
+  self : Faker,
+  min~ : @bigint.BigInt = 0N,
+  max? : @bigint.BigInt,
+  multiple_of~ : @bigint.BigInt = 1N,
+) -> @bigint.BigInt raise {
+  let max = max.unwrap_or(min + 999999999999999N)
+  guard min <= max && multiple_of > 0N else {
+    raise InvalidArgument("invalid big integer range or multiple")
+  }
+  let low = min / multiple_of + (if min % multiple_of > 0N { 1N } else { 0N })
+  let high = max / multiple_of - (if max % multiple_of < 0N { 1N } else { 0N })
+  guard low <= high else { raise InvalidArgument("no suitable big integer") }
+  if low == high {
+    return low * multiple_of
+  }
+  let delta = high - low + 1N
+  let offset = @bigint.BigInt::from_string(
+      self.numeric(length=delta.to_string().length()),
+    ) %
+    delta
+  (low + offset) * multiple_of
 }

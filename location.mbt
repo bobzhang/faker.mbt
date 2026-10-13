@@ -134,3 +134,32 @@ pub fn Faker::location_longitude(
 ) -> Double raise {
   self.float(min~, max~, fraction_digits=precision)
 }
+
+///|
+pub fn Faker::location_nearby_gps_coordinate(
+  self : Faker,
+  origin? : (Double, Double),
+  radius~ : Double = 10,
+  metric~ : Bool = false,
+) -> (Double, Double) raise {
+  guard radius >= 0 && !radius.is_inf() else {
+    raise InvalidArgument("radius must be finite and nonnegative")
+  }
+  guard origin is Some((lat, lon)) else {
+    return (self.location_latitude(), self.location_longitude())
+  }
+  let angle = self.float(max=2 * @math.PI, fraction_digits=5)
+  let distance = self.float(
+      max=if metric { radius } else { radius * 1.60934 },
+      fraction_digits=3,
+    ) *
+    0.995 /
+    (40000.0 / 360)
+  let mut latitude = (lat + @math.sin(angle) * distance) % 180
+  let mut longitude = lon + @math.cos(angle) * distance
+  if latitude.abs() > 90 {
+    latitude = latitude.signum() * 180 - latitude
+    longitude += 180
+  }
+  (latitude, (longitude % 360 + 540) % 360 - 180)
+}
