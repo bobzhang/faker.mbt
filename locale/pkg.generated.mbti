@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "dii/faker/locale"
+package "bobzhang/faker/locale"
 
 // Values
 pub fn merge(ArrayView[Locale]) -> Locale

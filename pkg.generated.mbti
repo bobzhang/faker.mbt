@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "dii/faker"
+package "bobzhang/faker"
 
 import {
-  "dii/faker/locale",
-  "dii/faker/randomizer",
+  "bobzhang/faker/locale",
+  "bobzhang/faker/randomizer",
   "moonbitlang/core/bigint",
 }
 

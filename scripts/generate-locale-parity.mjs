@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 const {Faker} = await import('../.repos/faker/src/faker.ts');
 const names = JSON.parse(readFileSync('scripts/upstream.json')).locales;
 mkdirSync('integration', {recursive:true});
-writeFileSync('integration/moon.pkg', 'import {\n  "dii/faker",\n'+names.filter(n=>n!=='base').map(n=>`  "dii/faker/locales/${n.toLowerCase()}",`).join('\n')+'\n} for "wbtest"\n');
+writeFileSync('integration/moon.pkg', 'import {\n  "bobzhang/faker",\n'+names.filter(n=>n!=='base').map(n=>`  "bobzhang/faker/locales/${n.toLowerCase()}",`).join('\n')+'\n} for "wbtest"\n');
 const cases=[['person_first_name','person','firstName'],['person_last_name','person','lastName'],['person_full_name','person','fullName'],['location_city','location','city'],['location_street_address','location','streetAddress'],['location_zip_code','location','zipCode'],['phone_number','phone','number'],['company_name','company','name'],['person_bio','person','bio'],['internet_user_agent','internet','userAgent'],['location_postal_address','location','postalAddress'],['date_month','date','month'],['food_dish','food','dish'],['lorem_slug','lorem','slug'],['internet_domain_name','internet','domainName'],['internet_username','internet','username'],['internet_url','internet','url']];
 for(const name of names) {
  if(name==='base') continue;

@@ -1,4 +1,4 @@
-name = "dii/faker"
+name = "bobzhang/faker"
 
 version = "0.1.0"
 

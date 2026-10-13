@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "dii/faker/internal/unicode"
+package "bobzhang/faker/internal/unicode"
 
 // Values
 pub fn lower(String) -> String
