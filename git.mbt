@@ -37,9 +37,14 @@ pub fn Faker::git_commit_date(self : Faker, ref_date? : Int64) -> String raise {
 pub fn Faker::git_commit_entry(
   self : Faker,
   merge? : Bool,
-  eol~ : String = "\r\n",
+  eol~ : String = "CRLF",
   ref_date? : Int64,
 ) -> String raise {
+  let eol = match eol {
+    "LF" => "\n"
+    "CRLF" => "\r\n"
+    _ => raise InvalidArgument("eol must be LF or CRLF")
+  }
   let merge = merge.unwrap_or_else(() => self.boolean(probability=0.2))
   let lines = ["commit " + self.git_commit_sha()]
   if merge {

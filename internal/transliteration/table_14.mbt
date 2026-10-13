@@ -3,10 +3,6 @@
 ///|
 fn transliterate_14(code : Int32) -> String {
   match code {
-    63863 => "fji"
-    63864 => "g2x"
-    63865 => "g5l"
-    63866 => "kn5"
     63867 => "oo7"
     63868 => "prj"
     63869 => "rf6"
@@ -1003,6 +999,10 @@ fn transliterate_14(code : Int32) -> String {
     65047 => "9hy"
     65048 => "9hz"
     65049 => "..."
+    65072 => ".."
+    65073 => "6c4"
+    65074 => "6c3"
+    65075 => "_"
     _ => code.to_string(radix=36)
   }
 }

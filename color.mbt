@@ -13,7 +13,7 @@ pub fn Faker::color_rgb_channels(
   self : Faker,
   include_alpha~ : Bool = false,
 ) -> Array[Double] raise {
-  let values = multiple(() => self.int(max=255).to_double())
+  let values = multiple(_ => self.int(max=255).to_double())
   if include_alpha {
     values.push(self.float(multiple_of=0.01))
   }
@@ -22,7 +22,7 @@ pub fn Faker::color_rgb_channels(
 
 ///|
 pub fn Faker::color_cmyk(self : Faker) -> Array[Double] raise {
-  multiple(() => self.float(multiple_of=0.01), count=4)
+  multiple(_ => self.float(multiple_of=0.01), count=4)
 }
 
 ///|
@@ -33,7 +33,7 @@ pub fn Faker::color_hsl(
   let values = [self.int(max=360).to_double()]
   values.append(
     multiple(
-      () => self.float(multiple_of=0.01),
+      _ => self.float(multiple_of=0.01),
       count=if include_alpha { 3 } else { 2 },
     ),
   )
@@ -65,7 +65,7 @@ pub fn Faker::color_lch(self : Faker) -> Array[Double] raise {
 
 ///|
 pub fn Faker::color_by_css_color_space(self : Faker) -> Array[Double] raise {
-  multiple(() => self.float(multiple_of=0.0001))
+  multiple(_ => self.float(multiple_of=0.0001))
 }
 
 ///|

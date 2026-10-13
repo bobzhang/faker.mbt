@@ -1,5 +1,7 @@
 # Faker for MoonBit
 
+[![CI](https://github.com/bobzhang/faker.mbt/actions/workflows/ci.yml/badge.svg)](https://github.com/bobzhang/faker.mbt/actions/workflows/ci.yml)
+
 A native MoonBit port of the Faker checkout recorded in
 [scripts/upstream.json](scripts/upstream.json), with all 77 locale datasets,
 MT19937 random generation, and corresponding entry points for all 271 upstream
@@ -17,7 +19,7 @@ import { "dii/faker" }
 ```mbt check
 ///|
 test "seeded example" {
-  let faker = @faker.Faker::new(seed=42)
+  let faker = @faker.Faker(seed=42)
   assert_eq(faker.person_full_name(), "Nikita Cormier")
   assert_eq(faker.uuid(), "0d9b0fd3-2248-4649-9245-7c3890921ffc")
   faker.seed(42)
@@ -34,9 +36,9 @@ and helper methods use short names, such as `int`, `uuid`, and `array_element`.
 ```mbt check
 ///|
 test "generating structured test data" {
-  let faker = @faker.Faker::new(seed=123)
+  let faker = @faker.Faker(seed=123)
   let count = faker.int(min=3, max=8)
-  let identifiers = @faker.multiple(() => faker.uuid(), count~)
+  let identifiers = @faker.multiple(_ => faker.uuid(), count~)
   assert_eq(identifiers.length(), count)
   assert_true(faker.internet_email().contains("@"))
   assert_true(@faker.luhn_valid(faker.finance_credit_card_number()))
@@ -48,22 +50,22 @@ test "generating structured test data" {
 
 Each dataset is an independently importable package, using lowercase locale IDs:
 `dii/faker/locales/en`, `dii/faker/locales/zh_cn`, `dii/faker/locales/de_at`, etc.
-The default constructor uses English and base. Supply a fallback chain explicitly
-for other languages, in descending precedence:
+The default constructor uses English and base. For another language, pass its
+`locales()`: the locale followed by the fallbacks of upstream's prebuilt faker
+for it (`fakerZH_CN` is `zh_CN`, `en`, `base`), in descending precedence:
 
 ```mbt nocheck
-// Also import "dii/faker/locales/zh_cn", "dii/faker/locales/en",
-// and "dii/faker/locales/base" in moon.pkg.
+// Also import "dii/faker/locales/zh_cn" in moon.pkg.
+
 ///|
-let faker = @faker.Faker::new(seed=42, locales=[
-  @zh_cn.locale(),
-  @en.locale(),
-  @base.locale(),
-])
+let faker = @faker.Faker(seed=42, locales=@zh_cn.locales())
 
 ///|
 let name = faker.person_full_name()
 ```
+
+Each package also exports `locale()`, the dataset alone, for building a custom
+chain such as `[@zh_cn.locale(), @ja.locale(), @base.locale()]`.
 
 Fallback occurs per category entry, matching upstream: a defined
 `person.first_name` object is used whole. Its missing nested keys do not fall
@@ -74,15 +76,17 @@ combines locale entries without modifying the input category maps.
 ## Reproducibility and compatibility
 
 The scalar/array seeds and 53-bit MT19937 sequence match Faker. A generator owns
-its state unless you pass a shared randomizer. `Randomizer::new(precision32=true)`
+its state unless you pass a shared randomizer. `Randomizer(precision32=true)`
 provides the earlier 32-bit generator; `RandomSource` supports custom sources.
 `uniform_distributor` and `exponential_distributor` work with `int` and `float`.
-The committed fixtures compare outputs across five seeds, and the integration
-suite compares 13 compound generators in every language locale.
+The committed fixtures compare outputs across five seeds, including the optional
+arguments of each generator, and the integration suite compares 17 compound
+generators in every language locale. CI regenerates all of them from the pinned
+checkout and fails if the committed copies differ.
 
 Intentional MoonBit adaptations:
 
-- `Faker::new()` uses seed **5489**, rather than ambient randomness. Set a seed
+- `Faker()` uses seed **5489**, rather than ambient randomness. Set a seed
   explicitly when test output is part of a contract.
 - Dates are **Int64 Unix milliseconds**. Relative dates default to
   **2020-01-01T00:00:00Z**; use `set_default_ref_date` or a method's `ref_date`
@@ -92,9 +96,14 @@ Intentional MoonBit adaptations:
   `int64` covers JavaScript's safe integer range; `big_int` supports arbitrary
   precision. `float` accepts up to 15 fractional digits and rejects non-finite
   bounds. BigInt intentionally preserves upstream's decimal/modulo algorithm.
+- On the native backend `sin` and `cos` come from the platform C library, so
+  `location_nearby_gps_coordinate` with an `origin` can differ from the other
+  backends, and from upstream, in the last digit.
 - Invalid input raises checked `FakerError` variants. Empty randomizer seed
   arrays are a documented panic. Custom random sources must satisfy their trait
   contract. Enum reflection is replaced by explicit arrays of enum values.
+- `multiple` passes the index to its callback. `unique_array` takes an array;
+  `unique_array_with` takes a generator callback. Neither is overloaded.
 - Variable counts/lengths are composed with `int` or `range_to_number`.
   Word filters use `min_length`, `max_length`, and `LengthStrategy`.
 - Color generators return typed channel arrays; `color_rgb` returns hex.
@@ -133,6 +142,7 @@ stripping support and Python 3:
 ```sh
 node scripts/generate-locales.mjs
 node scripts/generate-transliteration.mjs
+node scripts/generate-slugify.mjs
 node scripts/generate-case-data.mjs
 node scripts/generate-finance-data.mjs
 python3 scripts/generate-data-methods.py

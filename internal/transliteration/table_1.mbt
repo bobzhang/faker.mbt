@@ -3,10 +3,6 @@
 ///|
 fn transliterate_1(code : Int32) -> String {
   match code {
-    7730 => "K"
-    7731 => "k"
-    7732 => "K"
-    7733 => "k"
     7734 => "L"
     7735 => "l"
     7736 => "L"
@@ -1003,6 +999,10 @@ fn transliterate_1(code : Int32) -> String {
     12225 => "unw"
     12226 => "uoq"
     12227 => "uzp"
+    12228 => "vat"
+    12229 => "vb3"
+    12230 => "vc5"
+    12231 => "vcr"
     _ => code.to_string(radix=36)
   }
 }

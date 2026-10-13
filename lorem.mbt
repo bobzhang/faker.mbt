@@ -10,7 +10,7 @@ pub fn Faker::lorem_word(
 
 ///|
 pub fn Faker::lorem_words(self : Faker, count~ : Int32 = 3) -> String raise {
-  multiple(() => self.lorem_word(), count~).join(" ")
+  multiple(_ => self.lorem_word(), count~).join(" ")
 }
 
 ///|
@@ -28,7 +28,7 @@ pub fn Faker::lorem_sentences(
   separator~ : String = " ",
 ) -> String raise {
   multiple(
-    () => self.lorem_sentence(),
+    _ => self.lorem_sentence(),
     count=count.unwrap_or_else(() => self.int(min=2, max=6)),
   ).join(separator)
 }
@@ -44,7 +44,7 @@ pub fn Faker::lorem_paragraphs(
   count~ : Int32 = 3,
   separator~ : String = "\n",
 ) -> String raise {
-  multiple(() => self.lorem_paragraph(), count~).join(separator)
+  multiple(_ => self.lorem_paragraph(), count~).join(separator)
 }
 
 ///|

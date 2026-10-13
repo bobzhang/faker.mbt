@@ -5,3 +5,11 @@ test "locale metadata parses" {
     Some(Json::string("en_AU_ocker")),
   )
 }
+
+///|
+test "fallback chain" {
+  let codes = @en_au_ocker.locales().map(locale => {
+    locale.get("metadata.code").unwrap()
+  })
+  json_inspect(codes, content=["en_AU_ocker", "en_AU", "en", "base"])
+}

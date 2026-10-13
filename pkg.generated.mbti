@@ -18,13 +18,15 @@ pub fn exponential_distributor(base? : Double, bias? : Double) -> ((&@randomizer
 
 pub fn luhn_valid(String) -> Bool
 
-pub fn[T] multiple(() -> T raise, count? : Int) -> Array[T] raise
+pub fn[T] multiple((Int) -> T raise, count? : Int) -> Array[T] raise
 
 pub fn mustache(String, Map[String, () -> String raise]) -> String raise
 
 pub fn slugify(String) -> String
 
 pub fn uniform_distributor() -> (&@randomizer.RandomSource) -> Double
+
+pub fn[T : Eq] unique_array_with(() -> T raise, Int) -> Array[T]
 
 // Errors
 pub suberror FakerError {
@@ -79,6 +81,7 @@ pub struct Faker {
   mut template_depth : Int
   mut ref_date : Int64
 }
+pub fn Faker::Faker(seed? : UInt, locales? : Array[@locale.Locale], randomizer? : &@randomizer.RandomSource) -> Self
 pub fn Faker::airline_aircraft_type(Self) -> String raise
 pub fn Faker::airline_airline(Self) -> Airline raise
 pub fn Faker::airline_airplane(Self) -> Airplane raise
@@ -225,11 +228,11 @@ pub fn Faker::internet_domain_suffix(Self) -> String raise
 pub fn Faker::internet_domain_word(Self) -> String raise
 pub fn Faker::internet_email(Self, first_name? : String, last_name? : String, provider? : String, allow_special_characters? : Bool) -> String raise
 pub fn Faker::internet_emoji(Self, types? : Array[String]) -> String raise
-pub fn Faker::internet_example_email(Self, first_name? : String, last_name? : String) -> String raise
+pub fn Faker::internet_example_email(Self, first_name? : String, last_name? : String, allow_special_characters? : Bool) -> String raise
 pub fn Faker::internet_http_method(Self) -> String raise
 pub fn Faker::internet_http_status_code(Self, types? : Array[String]) -> Int raise
 pub fn Faker::internet_ip(Self) -> String raise
-pub fn Faker::internet_ipv4(Self, cidr? : String) -> String raise
+pub fn Faker::internet_ipv4(Self, cidr? : String, network? : String) -> String raise
 pub fn Faker::internet_ipv6(Self) -> String raise
 pub fn Faker::internet_jwt(Self, header? : Json, payload? : Json, ref_date? : Int64) -> String raise
 pub fn Faker::internet_jwt_algorithm(Self) -> String raise
@@ -283,7 +286,6 @@ pub fn Faker::music_artist(Self) -> String raise
 pub fn Faker::music_genre(Self) -> String raise
 pub fn Faker::music_song_name(Self) -> String raise
 pub fn Faker::nanoid(Self, length? : Int) -> String raise
-pub fn Faker::new(seed? : UInt, locales? : Array[@locale.Locale], randomizer? : &@randomizer.RandomSource) -> Self
 pub fn Faker::number_binary(Self, min? : Int, max? : Int) -> String raise
 pub fn Faker::number_hex(Self, min? : Int, max? : Int) -> String raise
 pub fn Faker::number_octal(Self, min? : Int, max? : Int) -> String raise

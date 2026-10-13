@@ -2,7 +2,7 @@
 
 ///|
 test "upstream parity seed 0" {
-  let f = @faker.Faker::new(seed=0)
+  let f = @faker.Faker(seed=0)
   f.seed(0)
   json_inspect(f.date_between(0L, 1893456000000L), content="1039154221892")
   f.seed(0)
@@ -39,7 +39,7 @@ test "upstream parity seed 0" {
 
 ///|
 test "upstream parity seed 1" {
-  let f = @faker.Faker::new(seed=1)
+  let f = @faker.Faker(seed=1)
   f.seed(1)
   json_inspect(f.date_between(0L, 1893456000000L), content="789612816936")
   f.seed(1)
@@ -76,7 +76,7 @@ test "upstream parity seed 1" {
 
 ///|
 test "upstream parity seed 42" {
-  let f = @faker.Faker::new(seed=42)
+  let f = @faker.Faker(seed=42)
   f.seed(42)
   json_inspect(f.date_between(0L, 1893456000000L), content="709175235272")
   f.seed(42)
@@ -113,7 +113,7 @@ test "upstream parity seed 42" {
 
 ///|
 test "upstream parity seed 12345" {
-  let f = @faker.Faker::new(seed=12345)
+  let f = @faker.Faker(seed=12345)
   f.seed(12345)
   json_inspect(f.date_between(0L, 1893456000000L), content="1760187168642")
   f.seed(12345)
@@ -150,7 +150,7 @@ test "upstream parity seed 12345" {
 
 ///|
 test "upstream parity seed 4294967295" {
-  let f = @faker.Faker::new(seed=4294967295)
+  let f = @faker.Faker(seed=4294967295)
   f.seed(4294967295)
   json_inspect(f.date_between(0L, 1893456000000L), content="184861951090")
   f.seed(4294967295)

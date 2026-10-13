@@ -2,101 +2,61 @@
 
 ///|
 test "tr person.firstName" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(f.person_first_name(), "Buzaçtutuk")
 }
 
 ///|
 test "tr person.lastName" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(f.person_last_name(), "Limoncuoğlu")
 }
 
 ///|
 test "tr person.fullName" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(f.person_full_name(), "Buzaçtutuk Alkaya")
 }
 
 ///|
 test "tr location.city" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(f.location_city(), "Hatay")
 }
 
 ///|
 test "tr location.streetAddress" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(f.location_street_address(), "Harman Yolu Sokak 75c")
 }
 
 ///|
 test "tr location.zipCode" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(f.location_zip_code(), "39751")
 }
 
 ///|
 test "tr phone.number" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(f.phone_number(), "+90-975-110-86-70")
 }
 
 ///|
 test "tr company.name" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(f.company_name(), "Gül Group")
 }
 
 ///|
 test "tr person.bio" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(f.person_bio(), "traveler, philosopher, model")
 }
 
 ///|
 test "tr internet.userAgent" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(
     f.internet_user_agent(),
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/118.0",
@@ -105,11 +65,7 @@ test "tr internet.userAgent" {
 
 ///|
 test "tr location.postalAddress" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(
     f.location_postal_address(),
     "Nalbant Sokak 61b\nBitlis\nŞanlıurfa\n67098",
@@ -118,20 +74,36 @@ test "tr location.postalAddress" {
 
 ///|
 test "tr date.month" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(f.date_month(), "January")
 }
 
 ///|
 test "tr food.dish" {
-  let f = @faker.Faker::new(seed=42, locales=[
-    @tr.locale(),
-    @en.locale(),
-    @base.locale(),
-  ])
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
   assert_eq(f.food_dish(), "Jicama Salad")
+}
+
+///|
+test "tr lorem.slug" {
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
+  assert_eq(f.lorem_slug(), "voluptas-a-tempore")
+}
+
+///|
+test "tr internet.domainName" {
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
+  assert_eq(f.internet_domain_name(), "hospitable-unit.info")
+}
+
+///|
+test "tr internet.username" {
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
+  assert_eq(f.internet_username(), "Buzactutuk.Alkaya")
+}
+
+///|
+test "tr internet.url" {
+  let f = @faker.Faker(seed=42, locales=@tr.locales())
+  assert_eq(f.internet_url(), "https://weird-rawhide.gov.tr/")
 }

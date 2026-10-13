@@ -3,10 +3,6 @@
 ///|
 fn transliterate_16(code : Int32) -> String {
   match code {
-    120274 => "y"
-    120275 => "z"
-    120276 => "A"
-    120277 => "B"
     120278 => "C"
     120279 => "D"
     120280 => "E"
@@ -610,7 +606,7 @@ fn transliterate_16(code : Int32) -> String {
     122978 => "ts"
     122979 => "ch"
     122980 => "sh"
-    122981 => ""
+    122981 => "ui"
     122982 => "y"
     122983 => "wh"
     122984 => "uu"
@@ -1003,6 +999,10 @@ fn transliterate_16(code : Int32) -> String {
     194654 => "hlu"
     194655 => "hnm"
     194656 => "2xm0"
+    194657 => "2xnu"
+    194658 => "hrg"
+    194659 => "hsr"
+    194660 => "ht3"
     _ => code.to_string(radix=36)
   }
 }

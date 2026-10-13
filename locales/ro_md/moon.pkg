@@ -1,3 +1,6 @@
 import {
   "dii/faker/locale",
+  "dii/faker/locales/ro",
+  "dii/faker/locales/en",
+  "dii/faker/locales/base",
 }

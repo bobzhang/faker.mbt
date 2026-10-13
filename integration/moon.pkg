@@ -3,7 +3,6 @@ import {
   "dii/faker/locales/af_za",
   "dii/faker/locales/ar",
   "dii/faker/locales/az",
-  "dii/faker/locales/base",
   "dii/faker/locales/bn_bd",
   "dii/faker/locales/cs_cz",
   "dii/faker/locales/cy",

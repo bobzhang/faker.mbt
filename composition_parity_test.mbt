@@ -2,7 +2,7 @@
 
 ///|
 test "upstream parity seed 0" {
-  let f = @faker.Faker::new(seed=0)
+  let f = @faker.Faker(seed=0)
   f.seed(0)
   json_inspect(f.person_first_name(), content="Kian")
   f.seed(0)
@@ -79,7 +79,7 @@ test "upstream parity seed 0" {
 
 ///|
 test "upstream parity seed 1" {
-  let f = @faker.Faker::new(seed=1)
+  let f = @faker.Faker(seed=1)
   f.seed(1)
   json_inspect(f.person_first_name(), content="Aaliyah")
   f.seed(1)
@@ -153,7 +153,7 @@ test "upstream parity seed 1" {
 
 ///|
 test "upstream parity seed 42" {
-  let f = @faker.Faker::new(seed=42)
+  let f = @faker.Faker(seed=42)
   f.seed(42)
   json_inspect(f.person_first_name(), content="Nikita")
   f.seed(42)
@@ -230,7 +230,7 @@ test "upstream parity seed 42" {
 
 ///|
 test "upstream parity seed 12345" {
-  let f = @faker.Faker::new(seed=12345)
+  let f = @faker.Faker(seed=12345)
   f.seed(12345)
   json_inspect(f.person_first_name(), content="Colton")
   f.seed(12345)
@@ -310,7 +310,7 @@ test "upstream parity seed 12345" {
 
 ///|
 test "upstream parity seed 4294967295" {
-  let f = @faker.Faker::new(seed=4294967295)
+  let f = @faker.Faker(seed=4294967295)
   f.seed(4294967295)
   json_inspect(f.person_first_name(), content="Peyton")
   f.seed(4294967295)

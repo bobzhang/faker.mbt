@@ -3,10 +3,6 @@
 ///|
 fn transliterate_17(code : Int32) -> String {
   match code {
-    194657 => "2xnu"
-    194658 => "hrg"
-    194659 => "hsr"
-    194660 => "ht3"
     194661 => "hqw"
     194662 => "huu"
     194663 => "aum"

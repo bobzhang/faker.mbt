@@ -79,7 +79,7 @@ pub fn Faker::word_sample(
 ///|
 pub fn Faker::word_words(self : Faker, count? : Int32) -> String raise {
   multiple(
-    () => self.word_sample(),
+    _ => self.word_sample(),
     count=count.unwrap_or_else(() => self.int(min=1, max=3)),
   ).join(" ")
 }

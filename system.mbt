@@ -74,7 +74,7 @@ pub fn Faker::system_file_name(
     .to_array()
     .map(c => if c is ('a'..<='z' | '0'..<='9' | '_') { c } else { '_' }),
   )
-  let suffix = multiple(() => self.system_file_ext(), count=extension_count).join(
+  let suffix = multiple(_ => self.system_file_ext(), count=extension_count).join(
     ".",
   )
   if suffix == "" {

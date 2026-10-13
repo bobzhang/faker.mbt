@@ -98,12 +98,13 @@ pub fn[T] Faker::maybe(
 }
 
 ///|
+/// Call `generate` with each index in `0..<count` and collect the results.
 pub fn[T] multiple(
-  generate : () -> T raise,
+  generate : (Int32) -> T raise,
   count~ : Int32 = 3,
 ) -> Array[T] raise {
   guard count >= 0 else { raise InvalidArgument("count must be nonnegative") }
-  Array::makei(count, _ => generate())
+  Array::makei(count, generate)
 }
 
 ///|
@@ -118,7 +119,29 @@ pub fn[T : Eq] Faker::unique_array(
       unique.push(value)
     }
   }
-  self.array_elements(unique, count~)
+  let shuffled = self.shuffle(unique)
+  shuffled[:count.clamp(min=0, max=shuffled.length())].to_owned()
+}
+
+///|
+/// Call `generate` until `count` distinct values are collected, giving up after
+/// `1000 * count` attempts. As upstream, an error raised by `generate` ends the
+/// collection early instead of propagating.
+pub fn[T : Eq] unique_array_with(
+  generate : () -> T raise,
+  count : Int32,
+) -> Array[T] {
+  let unique : Array[T] = []
+  for _ in 0..<(1000 * count) {
+    if unique.length() >= count {
+      break
+    }
+    let value = generate() catch { _ => break }
+    if !unique.contains(value) {
+      unique.push(value)
+    }
+  }
+  unique
 }
 
 ///|
@@ -146,19 +169,10 @@ pub fn Faker::replace_symbols(self : Faker, template : String) -> String raise {
 }
 
 ///|
+/// Decompose accented characters (NFKD), drop combining marks, replace spaces
+/// with hyphens and remove everything outside `[A-Za-z0-9_.-]`.
 pub fn slugify(value : String) -> String {
-  let out = StringBuilder()
-  for c in value {
-    if c == ' ' {
-      out.write_char('-')
-    } else if c is ('a'..<='z' | 'A'..<='Z' | '0'..<='9') ||
-      c == '_' ||
-      c == '-' ||
-      c == '.' {
-      out.write_char(c)
-    }
-  }
-  out.to_string()
+  @transliteration.slugify(value)
 }
 
 ///|
