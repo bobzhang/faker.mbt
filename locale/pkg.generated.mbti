@@ -1,0 +1,18 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dii/faker/locale"
+
+// Values
+
+// Errors
+
+// Types and methods
+pub struct Locale {
+  data : Json
+}
+pub fn Locale::from_json(Json) -> Self
+pub fn Locale::get(Self, String) -> Json?
+pub fn Locale::parse(String) -> Self raise
+
+// Type aliases
+
+// Traits
