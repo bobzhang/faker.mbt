@@ -16,7 +16,7 @@ for (const name of names) {
   const prebuilt = readFileSync(`${root}/src/locale/${name}.ts`, 'utf8');
   const chain = (prebuilt.match(/locale: \[([^\]]+)\]/)?.[1] ?? name).split(',').map(x => x.trim()).filter(Boolean);
   const fallbacks = chain.filter(x => x !== name).map(x => x.toLowerCase());
-  writeFileSync(`${directory}/moon.pkg`, fallbacks.length === 0 ? 'import { "dii/faker/locale" }\n' : `import {\n  "dii/faker/locale",\n${fallbacks.map(x => `  "dii/faker/locales/${x}",`).join('\n')}\n}\n`);
+  writeFileSync(`${directory}/moon.pkg`, fallbacks.length === 0 ? 'import { "bobzhang/faker/locale" }\n' : `import {\n  "bobzhang/faker/locale",\n${fallbacks.map(x => `  "bobzhang/faker/locales/${x}",`).join('\n')}\n}\n`);
   writeFileSync(`${directory}/fallback.mbt`, `// Generated from Faker's prebuilt ${name} instance. See LICENSE. Do not edit.\n///|\n/// This locale followed by the fallbacks of upstream's prebuilt faker for it,\n/// in descending precedence. Pass it as \`locales\` to \`Faker\`.\npub fn locales() -> Array[@locale.Locale] {\n  [${chain.map(x => x === name ? 'locale()' : `@${x.toLowerCase()}.locale()`).join(', ')}]\n}\n`);
   const chunks = [];
   let chunk = '';

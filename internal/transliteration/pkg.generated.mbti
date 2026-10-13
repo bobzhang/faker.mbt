@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "dii/faker/internal/transliteration"
+package "bobzhang/faker/internal/transliteration"
 
 // Values
 pub fn slugify(String) -> String

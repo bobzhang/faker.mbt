@@ -1,8 +1,8 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "dii/faker/locales/ku_ckb"
+package "bobzhang/faker/locales/ku_ckb"
 
 import {
-  "dii/faker/locale",
+  "bobzhang/faker/locale",
 }
 
 // Values

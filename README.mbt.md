@@ -10,10 +10,10 @@ MoonBit dependencies are needed to use the library.
 
 ## Quick start
 
-Import `dii/faker` in your `moon.pkg`:
+Import `bobzhang/faker` in your `moon.pkg`:
 
 ```text
-import { "dii/faker" }
+import { "bobzhang/faker" }
 ```
 
 ```mbt check
@@ -49,13 +49,13 @@ test "generating structured test data" {
 ## Locales
 
 Each dataset is an independently importable package, using lowercase locale IDs:
-`dii/faker/locales/en`, `dii/faker/locales/zh_cn`, `dii/faker/locales/de_at`, etc.
+`bobzhang/faker/locales/en`, `bobzhang/faker/locales/zh_cn`, `bobzhang/faker/locales/de_at`, etc.
 The default constructor uses English and base. For another language, pass its
 `locales()`: the locale followed by the fallbacks of upstream's prebuilt faker
 for it (`fakerZH_CN` is `zh_CN`, `en`, `base`), in descending precedence:
 
 ```mbt nocheck
-// Also import "dii/faker/locales/zh_cn" in moon.pkg.
+// Also import "bobzhang/faker/locales/zh_cn" in moon.pkg.
 
 ///|
 let faker = @faker.Faker(seed=42, locales=@zh_cn.locales())

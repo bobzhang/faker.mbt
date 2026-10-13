@@ -1,4 +1,4 @@
 import {
-  "dii/faker/locale",
-  "dii/faker/locales/base",
+  "bobzhang/faker/locale",
+  "bobzhang/faker/locales/base",
 }
