@@ -1,1 +1,7 @@
-
+import {
+  "dii/faker/randomizer",
+  "dii/faker/locale",
+  "dii/faker/locales/en",
+  "dii/faker/locales/base",
+  "moonbitlang/core/math",
+}
