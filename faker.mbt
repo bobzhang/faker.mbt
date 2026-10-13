@@ -76,3 +76,36 @@ fn Faker::strings(self : Faker, path : String) -> Array[String] raise {
 pub fn Faker::sample(self : Faker, path : String) -> String raise {
   self.array_element(self.strings(path))
 }
+
+///|
+fn Faker::sample_json(self : Faker, path : String) -> Json raise {
+  guard self.definition(path) is Array(values) else {
+    raise InvalidDefinition(path)
+  }
+  self.array_element(values)
+}
+
+///|
+fn json_string(value : Json) -> String raise {
+  match value {
+    String(s) => s
+    _ => raise InvalidDefinition("expected string")
+  }
+}
+
+///|
+fn json_field(value : Json, key : String) -> Json raise {
+  match value {
+    Object(fields) =>
+      fields.get(key).unwrap_or_else(() => raise InvalidDefinition(key))
+    _ => raise InvalidDefinition(key)
+  }
+}
+
+///|
+fn json_int(value : Json) -> Int32 raise {
+  match value {
+    Number(n, ..) => n.to_int()
+    _ => raise InvalidDefinition("expected number")
+  }
+}

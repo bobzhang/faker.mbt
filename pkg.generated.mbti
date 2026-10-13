@@ -19,29 +19,137 @@ pub suberror FakerError {
 }
 
 // Types and methods
+pub struct Airline {
+  name : String
+  iata_code : String
+} derive(ToJson)
+pub fn Airline::to_json(Self) -> Json
+
+pub struct Airplane {
+  name : String
+  iata_type_code : String
+} derive(ToJson)
+pub fn Airplane::to_json(Self) -> Json
+
+pub struct Airport {
+  name : String
+  iata_code : String
+} derive(ToJson)
+pub fn Airport::to_json(Self) -> Json
+
 pub(all) enum Casing {
   Lower
   Upper
   Mixed
 }
 
+pub struct ChemicalElement {
+  symbol : String
+  name : String
+  atomic_number : Int
+} derive(ToJson)
+pub fn ChemicalElement::to_json(Self) -> Json
+
+pub struct Currency {
+  name : String
+  code : String
+  symbol : String
+  numeric_code : String
+} derive(ToJson)
+pub fn Currency::to_json(Self) -> Json
+
 pub struct Faker {
   randomizer : @randomizer.Randomizer
   locales : Array[@locale.Locale]
 }
+pub fn Faker::airline_airline(Self) -> Airline raise
+pub fn Faker::airline_airplane(Self) -> Airplane raise
+pub fn Faker::airline_airport(Self) -> Airport raise
 pub fn Faker::alpha(Self, length? : Int, casing? : Casing, exclude? : String) -> String raise
 pub fn Faker::alphanumeric(Self, length? : Int, casing? : Casing, exclude? : String) -> String raise
+pub fn Faker::animal_bear(Self) -> String raise
+pub fn Faker::animal_bird(Self) -> String raise
+pub fn Faker::animal_cat(Self) -> String raise
+pub fn Faker::animal_cetacean(Self) -> String raise
+pub fn Faker::animal_cow(Self) -> String raise
+pub fn Faker::animal_crocodilia(Self) -> String raise
+pub fn Faker::animal_dog(Self) -> String raise
+pub fn Faker::animal_fish(Self) -> String raise
+pub fn Faker::animal_horse(Self) -> String raise
+pub fn Faker::animal_insect(Self) -> String raise
+pub fn Faker::animal_lion(Self) -> String raise
+pub fn Faker::animal_pet_name(Self) -> String raise
+pub fn Faker::animal_rabbit(Self) -> String raise
+pub fn Faker::animal_rodent(Self) -> String raise
+pub fn Faker::animal_snake(Self) -> String raise
+pub fn Faker::animal_type(Self) -> String raise
 pub fn[T] Faker::array_element(Self, ArrayView[T]) -> T raise
 pub fn[T] Faker::array_elements(Self, ArrayView[T], count? : Int) -> Array[T] raise
 pub fn[T] Faker::array_samples(Self, ArrayView[T], count? : Int) -> Array[T] raise
 pub fn Faker::binary(Self, length? : Int, prefix? : String) -> String raise
+pub fn Faker::book_author(Self) -> String raise
+pub fn Faker::book_format(Self) -> String raise
+pub fn Faker::book_genre(Self) -> String raise
+pub fn Faker::book_publisher(Self) -> String raise
+pub fn Faker::book_series(Self) -> String raise
+pub fn Faker::book_title(Self) -> String raise
 pub fn Faker::boolean(Self, probability? : Double) -> Bool raise
+pub fn Faker::color_human(Self) -> String raise
+pub fn Faker::color_space(Self) -> String raise
+pub fn Faker::commerce_department(Self) -> String raise
+pub fn Faker::commerce_product(Self) -> String raise
+pub fn Faker::commerce_product_adjective(Self) -> String raise
+pub fn Faker::commerce_product_material(Self) -> String raise
+pub fn Faker::company_buzz_adjective(Self) -> String raise
+pub fn Faker::company_buzz_noun(Self) -> String raise
+pub fn Faker::company_buzz_verb(Self) -> String raise
+pub fn Faker::company_catch_phrase_adjective(Self) -> String raise
+pub fn Faker::company_catch_phrase_descriptor(Self) -> String raise
+pub fn Faker::company_catch_phrase_noun(Self) -> String raise
+pub fn Faker::database_collation(Self) -> String raise
+pub fn Faker::database_column(Self) -> String raise
+pub fn Faker::database_engine(Self) -> String raise
+pub fn Faker::database_type(Self) -> String raise
+pub fn Faker::date_time_zone(Self) -> String raise
 pub fn Faker::definition(Self, String) -> Json raise
+pub fn Faker::finance_currency(Self) -> Currency raise
+pub fn Faker::finance_transaction_type(Self) -> String raise
 pub fn Faker::float(Self, min? : Double, max? : Double, multiple_of? : Double, fraction_digits? : Int) -> Double raise
+pub fn Faker::food_adjective(Self) -> String raise
+pub fn Faker::food_ethnic_category(Self) -> String raise
+pub fn Faker::food_fruit(Self) -> String raise
+pub fn Faker::food_ingredient(Self) -> String raise
+pub fn Faker::food_meat(Self) -> String raise
+pub fn Faker::food_spice(Self) -> String raise
+pub fn Faker::food_vegetable(Self) -> String raise
 pub fn Faker::from_characters(Self, String, length? : Int) -> String raise
+pub fn Faker::hacker_abbreviation(Self) -> String raise
+pub fn Faker::hacker_adjective(Self) -> String raise
+pub fn Faker::hacker_ingverb(Self) -> String raise
+pub fn Faker::hacker_noun(Self) -> String raise
+pub fn Faker::hacker_verb(Self) -> String raise
 pub fn Faker::hexadecimal(Self, length? : Int, prefix? : String, casing? : Casing) -> String raise
 pub fn Faker::int(Self, min? : Int, max? : Int, multiple_of? : Int) -> Int raise
+pub fn Faker::internet_domain_suffix(Self) -> String raise
+pub fn Faker::internet_jwt_algorithm(Self) -> String raise
+pub fn Faker::location_continent(Self) -> String raise
+pub fn Faker::location_country(Self) -> String raise
+pub fn Faker::location_county(Self) -> String raise
+pub fn Faker::location_language(Self) -> Language raise
+pub fn Faker::location_time_zone(Self) -> String raise
 pub fn[T] Faker::maybe(Self, () -> T raise, probability? : Double) -> T? raise
+pub fn Faker::medical_allergen(Self) -> String raise
+pub fn Faker::medical_blood_type(Self) -> String raise
+pub fn Faker::medical_condition(Self) -> String raise
+pub fn Faker::medical_department(Self) -> String raise
+pub fn Faker::medical_drug_name(Self) -> String raise
+pub fn Faker::medical_procedure(Self) -> String raise
+pub fn Faker::medical_specialty(Self) -> String raise
+pub fn Faker::medical_symptom(Self) -> String raise
+pub fn Faker::music_album(Self) -> String raise
+pub fn Faker::music_artist(Self) -> String raise
+pub fn Faker::music_genre(Self) -> String raise
+pub fn Faker::music_song_name(Self) -> String raise
 pub fn Faker::nanoid(Self, length? : Int) -> String raise
 pub fn Faker::new(seed? : UInt, locales? : Array[@locale.Locale], randomizer? : @randomizer.Randomizer) -> Self
 pub fn Faker::number_binary(Self, min? : Int, max? : Int) -> String raise
@@ -49,10 +157,19 @@ pub fn Faker::number_hex(Self, min? : Int, max? : Int) -> String raise
 pub fn Faker::number_octal(Self, min? : Int, max? : Int) -> String raise
 pub fn Faker::numeric(Self, length? : Int, allow_leading_zeros? : Bool, exclude? : String) -> String raise
 pub fn Faker::octal(Self, length? : Int, prefix? : String) -> String raise
+pub fn Faker::person_gender(Self) -> String raise
+pub fn Faker::person_job_area(Self) -> String raise
+pub fn Faker::person_job_descriptor(Self) -> String raise
+pub fn Faker::person_job_type(Self) -> String raise
+pub fn Faker::person_sex(Self) -> String raise
+pub fn Faker::person_suffix(Self) -> String raise
+pub fn Faker::person_zodiac_sign(Self) -> String raise
 pub fn Faker::random(Self) -> Double
 pub fn Faker::replace_symbols(Self, String) -> String raise
 pub fn Faker::roman_numeral(Self, min? : Int, max? : Int) -> String raise
 pub fn Faker::sample(Self, String) -> String raise
+pub fn Faker::science_chemical_element(Self) -> ChemicalElement raise
+pub fn Faker::science_unit(Self) -> ScienceUnit raise
 pub fn Faker::seed(Self, UInt) -> Unit
 pub fn Faker::seed_array(Self, ArrayView[UInt]) -> Unit
 pub fn[T] Faker::shuffle(Self, ArrayView[T]) -> Array[T] raise
@@ -62,7 +179,25 @@ pub fn Faker::ulid(Self, Int64) -> String raise
 pub fn[T : Eq] Faker::unique_array(Self, ArrayView[T], Int) -> Array[T] raise
 pub fn Faker::uuid(Self) -> String raise
 pub fn Faker::uuid_v7(Self, Int64) -> String raise
+pub fn Faker::vehicle_bicycle(Self) -> String raise
+pub fn Faker::vehicle_fuel(Self) -> String raise
+pub fn Faker::vehicle_manufacturer(Self) -> String raise
+pub fn Faker::vehicle_model(Self) -> String raise
+pub fn Faker::vehicle_type(Self) -> String raise
 pub fn[T] Faker::weighted_array_element(Self, ArrayView[(Double, T)]) -> T raise
+
+pub struct Language {
+  name : String
+  alpha2 : String
+  alpha3 : String
+} derive(ToJson)
+pub fn Language::to_json(Self) -> Json
+
+pub struct ScienceUnit {
+  name : String
+  symbol : String
+} derive(ToJson)
+pub fn ScienceUnit::to_json(Self) -> Json
 
 // Type aliases
 pub using @locale {type Locale}

@@ -47,3 +47,10 @@ fixtures('string_parity_test.mbt', [
  ['f.uuid_v7(1577836800000L)', f => f.string.uuid({version:7,refDate:1577836800000})],
  ['f.ulid(1577836800000L)', f => f.string.ulid({refDate:1577836800000})],
 ]);
+const { readFileSync } = await import('node:fs');
+const dataMethods = JSON.parse(readFileSync(new URL('./data-methods.json', import.meta.url)));
+const snakeKeys = value => Array.isArray(value) ? value.map(snakeKeys) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([k,v]) => [k.replace(/[A-Z]/g,c=>'_'+c.toLowerCase()),snakeKeys(v)])) : value;
+fixtures('data_parity_test.mbt', dataMethods.map(([moon,group,hyphen]) => {
+  const method = hyphen.replace(/-([a-z])/g, (_,c)=>c.toUpperCase());
+  return [`f.${moon}()`, f => snakeKeys(f[group][method]())];
+}));
