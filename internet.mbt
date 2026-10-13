@@ -74,11 +74,13 @@ pub fn Faker::internet_example_email(
   self : Faker,
   first_name? : String,
   last_name? : String,
+  allow_special_characters~ : Bool = false,
 ) -> String raise {
   self.internet_email(
     first_name?,
     last_name?,
     provider=self.sample("internet.example_email"),
+    allow_special_characters~,
   )
 }
 

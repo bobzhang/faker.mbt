@@ -11,7 +11,7 @@ pub struct Randomizer {
   mut index : Int
   precision32 : Bool
 }
-pub fn Randomizer::new(seed? : UInt, precision32? : Bool) -> Self
+pub fn Randomizer::Randomizer(seed? : UInt, precision32? : Bool) -> Self
 pub fn Randomizer::next(Self) -> Double
 pub fn Randomizer::next_f32(Self) -> Double
 pub fn Randomizer::next_u32(Self) -> UInt

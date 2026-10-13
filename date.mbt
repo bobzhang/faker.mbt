@@ -52,7 +52,7 @@ pub fn Faker::date_betweens(
   to : Int64,
   count~ : Int32 = 3,
 ) -> Array[Int64] raise {
-  let result = multiple(() => self.date_between(from, to), count~)
+  let result = multiple(_ => self.date_between(from, to), count~)
   result.sort()
   result
 }

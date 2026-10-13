@@ -2,7 +2,7 @@
 
 ///|
 test "upstream parity seed 0" {
-  let f = @faker.Faker::new(seed=0)
+  let f = @faker.Faker(seed=0)
   f.seed(0)
   json_inspect(f.git_commit_date(), content="Tue Dec 31 13:10:16 2019 +0600")
   f.seed(0)
@@ -21,7 +21,7 @@ test "upstream parity seed 0" {
 
 ///|
 test "upstream parity seed 1" {
-  let f = @faker.Faker::new(seed=1)
+  let f = @faker.Faker(seed=1)
   f.seed(1)
   json_inspect(f.git_commit_date(), content="Tue Dec 31 10:00:30 2019 +0600")
   f.seed(1)
@@ -40,7 +40,7 @@ test "upstream parity seed 1" {
 
 ///|
 test "upstream parity seed 42" {
-  let f = @faker.Faker::new(seed=42)
+  let f = @faker.Faker(seed=42)
   f.seed(42)
   json_inspect(f.git_commit_date(), content="Tue Dec 31 08:59:19 2019 +1100")
   f.seed(42)
@@ -59,7 +59,7 @@ test "upstream parity seed 42" {
 
 ///|
 test "upstream parity seed 12345" {
-  let f = @faker.Faker::new(seed=12345)
+  let f = @faker.Faker(seed=12345)
   f.seed(12345)
   json_inspect(f.git_commit_date(), content="Tue Dec 31 22:18:37 2019 -0400")
   f.seed(12345)
@@ -78,7 +78,7 @@ test "upstream parity seed 12345" {
 
 ///|
 test "upstream parity seed 4294967295" {
-  let f = @faker.Faker::new(seed=4294967295)
+  let f = @faker.Faker(seed=4294967295)
   f.seed(4294967295)
   json_inspect(f.git_commit_date(), content="Tue Dec 31 02:20:35 2019 +1000")
   f.seed(4294967295)

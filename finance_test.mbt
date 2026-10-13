@@ -1,6 +1,6 @@
 ///|
 test "generated card numbers and IMEIs pass independent Luhn validation" {
-  let f = @faker.Faker::new(seed=37)
+  let f = @faker.Faker(seed=37)
   for _ in 0..<200 {
     assert_true(@faker.luhn_valid(f.finance_credit_card_number()))
     assert_true(@faker.luhn_valid(f.phone_imei()))
@@ -13,7 +13,7 @@ test "generated card numbers and IMEIs pass independent Luhn validation" {
 
 ///|
 test "IBAN mod 97 and UPC check digits" {
-  let f = @faker.Faker::new(seed=123)
+  let f = @faker.Faker(seed=123)
   for _ in 0..<100 {
     let iban = f.finance_iban()
     let moved = iban[4:].to_owned() + iban[:4].to_owned()

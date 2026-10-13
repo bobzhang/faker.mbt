@@ -1,6 +1,6 @@
 ///|
 test "degenerate ranges and singleton arrays do not advance the sequence" {
-  let f = @faker.Faker::new(seed=42)
+  let f = @faker.Faker(seed=42)
   assert_eq(f.int(min=-4, max=-4), -4)
   assert_eq(f.array_element(["only"]), "only")
   assert_eq(f.random(), 0.3745401188473625)
@@ -8,7 +8,7 @@ test "degenerate ranges and singleton arrays do not advance the sequence" {
 
 ///|
 test "invalid generation parameters raise errors" {
-  let f = @faker.Faker::new()
+  let f = @faker.Faker()
   let operations : Array[() -> Unit raise] = [
     () => ignore(f.int(min=2, max=1)),
     () => ignore(f.int(multiple_of=0)),
@@ -39,7 +39,7 @@ test "locale fallback is per entry and explicit null blocks fallback" {
   let second = @faker.Locale::from_json({
     "person": { "first_name": { "male": ["B"] }, "suffix": ["Jr."] },
   })
-  let f = @faker.Faker::new(locales=[first, second])
+  let f = @faker.Faker(locales=[first, second])
   assert_eq(f.sample("person.first_name.female"), "A")
   try f.sample("person.first_name.male") catch {
     @faker.MissingDefinition(_) => ()
@@ -58,14 +58,21 @@ test "locale fallback is per entry and explicit null blocks fallback" {
 
 ///|
 test "instances isolate state unless a randomizer is shared" {
-  let a = @faker.Faker::new(seed=42)
-  let b = @faker.Faker::new(seed=42)
+  let a = @faker.Faker(seed=42)
+  let b = @faker.Faker(seed=42)
   for _ in 0..<100 {
     assert_eq(a.random(), b.random())
   }
-  let rng = @faker.Randomizer::new(seed=42)
-  let c = @faker.Faker::new(randomizer=rng)
-  let d = @faker.Faker::new(randomizer=rng)
+  let rng = @faker.Randomizer(seed=42)
+  let c = @faker.Faker(randomizer=rng)
+  let d = @faker.Faker(randomizer=rng)
   assert_eq(c.random(), 0.3745401188473625)
   assert_eq(d.random(), 0.9507143064099162)
+}
+
+///|
+/// Round a coordinate to nine decimal places. Native sin/cos come from the
+/// platform C library, so the parity fixtures do not compare the last digit.
+fn round_coordinate(pair : (Double, Double)) -> Array[Double] {
+  [pair.0, pair.1].map(x => (x * 1.0e9 + 0.5).floor() / 1.0e9)
 }

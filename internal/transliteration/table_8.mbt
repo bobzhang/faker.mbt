@@ -3,10 +3,6 @@
 ///|
 fn transliterate_8(code : Int32) -> String {
   match code {
-    49323 => "3d43g53ia"
-    49324 => "3d53fl"
-    49325 => "3d53fl3hk"
-    49326 => "3d53fl3hl"
     49327 => "3d53fl3hm"
     49328 => "3d53fl3hn"
     49329 => "3d53fl3ho"
@@ -1003,6 +999,10 @@ fn transliterate_8(code : Int32) -> String {
     50320 => "3d63fz3hz"
     50321 => "3d63fz3i0"
     50322 => "3d63fz3i1"
+    50323 => "3d63fz3i2"
+    50324 => "3d63fz3i3"
+    50325 => "3d63fz3i4"
+    50326 => "3d63fz3i5"
     _ => code.to_string(radix=36)
   }
 }

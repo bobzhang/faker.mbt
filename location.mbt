@@ -15,12 +15,15 @@ pub fn Faker::location_state(
 ///|
 pub fn Faker::location_country_code(
   self : Faker,
-  variant~ : String = "alpha2",
+  variant~ : String = "alpha-2",
 ) -> String raise {
-  guard variant == "alpha2" || variant == "alpha3" || variant == "numeric" else {
-    raise InvalidArgument("invalid country code variant")
+  let field = match variant {
+    "alpha-2" | "alpha2" => "alpha2"
+    "alpha-3" | "alpha3" => "alpha3"
+    "numeric" => "numeric"
+    _ => raise InvalidArgument("invalid country code variant")
   }
-  json_string(json_field(self.sample_json("location.country_code"), variant))
+  json_string(json_field(self.sample_json("location.country_code"), field))
 }
 
 ///|

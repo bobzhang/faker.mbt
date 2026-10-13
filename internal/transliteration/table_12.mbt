@@ -3,10 +3,6 @@
 ///|
 fn transliterate_12(code : Int32) -> String {
   match code {
-    53323 => "3db3g13i6"
-    53324 => "3db3g13i7"
-    53325 => "3db3g13i8"
-    53326 => "3db3g13i9"
     53327 => "3db3g13ia"
     53328 => "3db3g2"
     53329 => "3db3g23hk"
@@ -1003,6 +999,10 @@ fn transliterate_12(code : Int32) -> String {
     54320 => "3dd3fv3hv"
     54321 => "3dd3fv3hw"
     54322 => "3dd3fv3hx"
+    54323 => "3dd3fv3hy"
+    54324 => "3dd3fv3hz"
+    54325 => "3dd3fv3i0"
+    54326 => "3dd3fv3i1"
     _ => code.to_string(radix=36)
   }
 }

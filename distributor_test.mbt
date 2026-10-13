@@ -21,7 +21,7 @@ impl @faker.RandomSource for ConstantRandomizer with fn seed_array(
 
 ///|
 test "custom randomizer and numeric distributors" {
-  let f = @faker.Faker::new(randomizer=ConstantRandomizer::{ })
+  let f = @faker.Faker(randomizer=ConstantRandomizer::{ })
   assert_eq(f.int(min=0, max=99), 25)
   assert_eq(f.float(), 0.25)
   assert_eq(f.int(min=5, max=10, distributor=_ => 0), 5)
@@ -39,8 +39,8 @@ test "custom randomizer and numeric distributors" {
 
 ///|
 test "32-bit randomizer is available to Faker" {
-  let rng = @faker.Randomizer::new(seed=42, precision32=true)
-  let f = @faker.Faker::new(randomizer=rng)
+  let rng = @faker.Randomizer(seed=42, precision32=true)
+  let f = @faker.Faker(randomizer=rng)
   assert_eq(f.random(), 1608637542.0 / 4294967296.0)
   f.seed(42)
   assert_eq(f.random(), 1608637542.0 / 4294967296.0)

@@ -3,10 +3,6 @@
 ///|
 fn transliterate_2(code : Int32) -> String {
   match code {
-    12228 => "vat"
-    12229 => "vb3"
-    12230 => "vc5"
-    12231 => "vcr"
     12232 => "vcz"
     12233 => "vd9"
     12234 => "vdd"
@@ -698,8 +694,8 @@ fn transliterate_2(code : Int32) -> String {
     13309 => "30k4l"
     13310 => "31k4l"
     13311 => "gal"
-    42652 => ""
-    42653 => ""
+    42652 => "ui"
+    42653 => "uk"
     42864 => "x2n"
     42993 => "S"
     42994 => "C"
@@ -1003,6 +999,10 @@ fn transliterate_2(code : Int32) -> String {
     44320 => "3cw3fv3hr"
     44321 => "3cw3fv3hs"
     44322 => "3cw3fv3ht"
+    44323 => "3cw3fv3hu"
+    44324 => "3cw3fv3hv"
+    44325 => "3cw3fv3hw"
+    44326 => "3cw3fv3hx"
     _ => code.to_string(radix=36)
   }
 }

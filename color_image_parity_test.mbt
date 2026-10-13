@@ -2,7 +2,7 @@
 
 ///|
 test "upstream parity seed 0" {
-  let f = @faker.Faker::new(seed=0)
+  let f = @faker.Faker(seed=0)
   f.seed(0)
   json_inspect(f.color_rgb(), content="#cfdb9e")
   f.seed(0)
@@ -63,9 +63,10 @@ test "upstream parity seed 0" {
     content="49510436188267011438",
   )
   f.seed(0)
-  json_inspect(f.location_nearby_gps_coordinate(origin=(33.0, -170.0)), content=[
-    32.96888133695041, -170.09826228320776,
-  ])
+  json_inspect(
+    round_coordinate(f.location_nearby_gps_coordinate(origin=(33.0, -170.0))),
+    content=[32.968881337, -170.098262283],
+  )
   f.seed(0)
   json_inspect(
     f.finance_transaction_description(),
@@ -75,7 +76,7 @@ test "upstream parity seed 0" {
 
 ///|
 test "upstream parity seed 1" {
-  let f = @faker.Faker::new(seed=1)
+  let f = @faker.Faker(seed=1)
   f.seed(1)
   json_inspect(f.color_rgb(), content="#9f0632")
   f.seed(1)
@@ -136,9 +137,10 @@ test "upstream parity seed 1" {
     content="-88596826389835161333",
   )
   f.seed(1)
-  json_inspect(f.location_nearby_gps_coordinate(origin=(33.0, -170.0)), content=[
-    33.05170292553951, -170.0900142647979,
-  ])
+  json_inspect(
+    round_coordinate(f.location_nearby_gps_coordinate(origin=(33.0, -170.0))),
+    content=[33.051702926, -170.090014265],
+  )
   f.seed(1)
   json_inspect(
     f.finance_transaction_description(),
@@ -148,7 +150,7 @@ test "upstream parity seed 1" {
 
 ///|
 test "upstream parity seed 42" {
-  let f = @faker.Faker::new(seed=42)
+  let f = @faker.Faker(seed=42)
   f.seed(42)
   json_inspect(f.color_rgb(), content="#8ead33")
   f.seed(42)
@@ -209,9 +211,10 @@ test "upstream parity seed 42" {
     content="16764412722767476065",
   )
   f.seed(42)
-  json_inspect(f.location_nearby_gps_coordinate(origin=(33.0, -170.0)), content=[
-    33.09716177782431, -170.09660093199483,
-  ])
+  json_inspect(
+    round_coordinate(f.location_nearby_gps_coordinate(origin=(33.0, -170.0))),
+    content=[33.097161778, -170.096600932],
+  )
   f.seed(42)
   json_inspect(
     f.finance_transaction_description(),
@@ -221,7 +224,7 @@ test "upstream parity seed 42" {
 
 ///|
 test "upstream parity seed 12345" {
-  let f = @faker.Faker::new(seed=12345)
+  let f = @faker.Faker(seed=12345)
   f.seed(12345)
   json_inspect(f.color_rgb(), content="#e644cd")
   f.seed(12345)
@@ -282,9 +285,10 @@ test "upstream parity seed 12345" {
     content="-89367242017283504300",
   )
   f.seed(12345)
-  json_inspect(f.location_nearby_gps_coordinate(origin=(33.0, -170.0)), content=[
-    32.98048930791436, -169.958795967039,
-  ])
+  json_inspect(
+    round_coordinate(f.location_nearby_gps_coordinate(origin=(33.0, -170.0))),
+    content=[32.980489308, -169.958795967],
+  )
   f.seed(12345)
   json_inspect(
     f.finance_transaction_description(),
@@ -294,7 +298,7 @@ test "upstream parity seed 12345" {
 
 ///|
 test "upstream parity seed 4294967295" {
-  let f = @faker.Faker::new(seed=4294967295)
+  let f = @faker.Faker(seed=4294967295)
   f.seed(4294967295)
   json_inspect(f.color_rgb(), content="#2ebb0f")
   f.seed(4294967295)
@@ -355,9 +359,10 @@ test "upstream parity seed 4294967295" {
     content="27022375472615849586",
   )
   f.seed(4294967295)
-  json_inspect(f.location_nearby_gps_coordinate(origin=(33.0, -170.0)), content=[
-    33.07569449350995, -169.89248729593243,
-  ])
+  json_inspect(
+    round_coordinate(f.location_nearby_gps_coordinate(origin=(33.0, -170.0))),
+    content=[33.075694494, -169.892487296],
+  )
   f.seed(4294967295)
   json_inspect(
     f.finance_transaction_description(),

@@ -540,9 +540,7 @@ fn transliterate_0(code : Int32) -> String {
     1063 => "Ch"
     1064 => "Sh"
     1065 => "Sch"
-    1066 => ""
     1067 => "Y"
-    1068 => ""
     1069 => "E"
     1070 => "Yu"
     1071 => "Ya"
@@ -572,9 +570,7 @@ fn transliterate_0(code : Int32) -> String {
     1095 => "ch"
     1096 => "sh"
     1097 => "sch"
-    1098 => ""
     1099 => "y"
-    1100 => ""
     1101 => "e"
     1102 => "yu"
     1103 => "ya"
@@ -1003,6 +999,10 @@ fn transliterate_0(code : Int32) -> String {
     7727 => "i"
     7728 => "K"
     7729 => "k"
+    7730 => "K"
+    7731 => "k"
+    7732 => "K"
+    7733 => "k"
     _ => code.to_string(radix=36)
   }
 }

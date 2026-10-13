@@ -108,7 +108,8 @@ pub fn Faker::finance_vat_number(
     raise InvalidDefinition("VAT formats")
   }
   let country = country_code.unwrap_or_else(() => {
-    self.array_element(formats.keys().to_array())
+    // `GR` duplicates `EL`; upstream leaves it out so Greece is not drawn twice.
+    self.array_element(formats.keys().filter(code => code != "GR").to_array())
   })
   guard formats.get(country) is Some(value) else {
     raise InvalidArgument("unsupported VAT country")

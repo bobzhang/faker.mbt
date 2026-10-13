@@ -24,13 +24,13 @@ pub struct Faker {
 ///|
 /// Construct an English generator. The portable default seed is 5489.
 /// Pass locales in descending precedence, including any desired fallbacks.
-pub fn Faker::new(
+pub fn Faker::Faker(
   seed~ : UInt32 = 5489,
   locales~ : Array[Locale] = [@en.locale(), @base.locale()],
   randomizer? : &RandomSource,
 ) -> Faker {
   {
-    randomizer: randomizer.unwrap_or_else(() => Randomizer::new(seed~)),
+    randomizer: randomizer.unwrap_or_else(() => Randomizer(seed~)),
     locales: locales.copy(),
     template_depth: 0,
     ref_date: 1577836800000L,

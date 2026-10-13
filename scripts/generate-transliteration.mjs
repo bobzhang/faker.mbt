@@ -6,7 +6,7 @@ for (let code = 128; code <= 0x10ffff; code++) {
  if (code >= 0xd800 && code <= 0xdfff) continue;
  const char = String.fromCodePoint(code);
  const normalized = char.normalize('NFKD').replaceAll(/[\u0300-\u036f]/g, '');
- const result = [...normalized].map(c=>charMapping[c] ?? (c.codePointAt(0)<128 ? c : c.codePointAt(0).toString(36))).join('');
+ const result = [...normalized].map(c=>charMapping[c] || (c.codePointAt(0)<128 ? c : c.codePointAt(0).toString(36))).join('');
  if (result !== code.toString(36)) entries.push(`    ${code} => ${JSON.stringify(result)}`);
 }
 // Split lookup blocks to stay within compiler source segment limits.

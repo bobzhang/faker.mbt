@@ -7,7 +7,7 @@ pub struct Randomizer {
 }
 
 ///|
-pub fn Randomizer::new(
+pub fn Randomizer::Randomizer(
   seed~ : UInt32 = 5489,
   precision32~ : Bool = false,
 ) -> Randomizer {
