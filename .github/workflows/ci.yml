@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - run: moon version --all
+      - name: Check
+        run: moon check --target all --deny-warn
+      - name: Format
+        run: moon fmt --check
+      - name: Interfaces are up to date
+        run: |
+          moon info
+          git diff --exit-code
+      - name: Test
+        run: moon test --target all
+
+  # Regenerate every generated file from the pinned upstream checkout and fail
+  # if the committed copies have drifted.
+  upstream-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Read the pinned upstream commit
+        id: upstream
+        run: echo "commit=$(jq -r .commit scripts/upstream.json)" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v5
+        with:
+          repository: faker-js/faker
+          ref: ${{ steps.upstream.outputs.commit }}
+          path: .repos/faker
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 25
+      - name: Install MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Regenerate
+        run: |
+          node scripts/generate-locales.mjs
+          node scripts/generate-transliteration.mjs
+          node scripts/generate-slugify.mjs
+          node scripts/generate-case-data.mjs
+          node scripts/generate-finance-data.mjs
+          python3 scripts/generate-data-methods.py
+          python3 scripts/api-coverage.py
+          python3 scripts/generate-template-dispatch.py
+          node scripts/generate-parity.mjs
+          node scripts/generate-locale-parity.mjs
+          moon fmt
+          moon info
+      - name: Generated files match the pinned upstream
+        run: git diff --exit-code
