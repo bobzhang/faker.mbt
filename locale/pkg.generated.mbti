@@ -2,6 +2,7 @@
 package "dii/faker/locale"
 
 // Values
+pub fn merge(ArrayView[Locale]) -> Locale
 
 // Errors
 

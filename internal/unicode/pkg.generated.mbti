@@ -1,0 +1,15 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dii/faker/internal/unicode"
+
+// Values
+pub fn lower(String) -> String
+
+pub fn upper(String) -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

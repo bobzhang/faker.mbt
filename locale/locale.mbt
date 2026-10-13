@@ -32,3 +32,29 @@ pub fn Locale::get(self : Locale, path : String) -> Json? {
   }
   Some(value)
 }
+
+///|
+/// Merge locale entries in descending precedence, matching Faker mergeLocales.
+/// Entry objects (such as person.first_name) are replaced whole, not deep-merged.
+pub fn merge(locales : ArrayView[Locale]) -> Locale {
+  let merged : Map[String, Json] = Map([])
+  for locale in locales {
+    if locale.data is Object(categories) {
+      for name, category in categories {
+        if category is Object(entries) {
+          let fields : Map[String, Json] = match merged.get(name) {
+            Some(Object(values)) => values
+            _ => {}
+          }
+          for key, value in entries {
+            if !fields.contains(key) {
+              fields[key] = value
+            }
+          }
+          merged[name] = Json::object(fields)
+        }
+      }
+    }
+  }
+  Locale::from_json(Json::object(merged))
+}

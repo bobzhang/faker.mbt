@@ -70,9 +70,7 @@ pub fn Faker::system_file_name(
   extension_count~ : Int32 = 1,
 ) -> String raise {
   let name = String::from_array(
-    self
-    .word_words()
-    .to_lower()
+    @unicode.lower(self.word_words())
     .to_array()
     .map(c => if c is ('a'..<='z' | '0'..<='9' | '_') { c } else { '_' }),
   )

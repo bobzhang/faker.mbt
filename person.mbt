@@ -21,9 +21,15 @@ pub fn Faker::person_sex_type(
 
 ///|
 fn Faker::optional_definition(self : Faker, path : String) -> Json? {
+  let parts = path.split(".").map(s => s.to_owned()).to_array()
+  let entry = parts[:parts.length().min(2)].to_owned().join(".")
+  let tail = parts[parts.length().min(2):].to_owned().join(".")
   for locale in self.locales {
-    if locale.get(path) is Some(value) {
-      return Some(value)
+    if locale.get(entry) is Some(value) {
+      if tail == "" {
+        return Some(value)
+      }
+      return Locale::from_json(value).get(tail)
     }
   }
   None

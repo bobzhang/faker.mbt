@@ -1,6 +1,7 @@
 import {
   "dii/faker/randomizer",
   "dii/faker/internal/transliteration",
+  "dii/faker/internal/unicode",
   "dii/faker/locale",
   "dii/faker/locales/en",
   "dii/faker/locales/base",

@@ -2,7 +2,7 @@
 pub using @locale {type Locale}
 
 ///|
-pub using @randomizer {type Randomizer}
+pub using @randomizer {type Randomizer, trait RandomSource}
 
 ///|
 pub suberror FakerError {
@@ -15,7 +15,7 @@ pub suberror FakerError {
 /// Stateful fake data generator. Instances own their random sequence unless a
 /// shared randomizer is supplied. Locale definitions are checked in order.
 pub struct Faker {
-  randomizer : Randomizer
+  randomizer : &RandomSource
   locales : Array[Locale]
   mut template_depth : Int32
   mut ref_date : Int64
@@ -27,7 +27,7 @@ pub struct Faker {
 pub fn Faker::new(
   seed~ : UInt32 = 5489,
   locales~ : Array[Locale] = [@en.locale(), @base.locale()],
-  randomizer? : Randomizer,
+  randomizer? : &RandomSource,
 ) -> Faker {
   {
     randomizer: randomizer.unwrap_or_else(() => Randomizer::new(seed~)),
@@ -54,12 +54,9 @@ pub fn Faker::random(self : Faker) -> Double {
 
 ///|
 pub fn Faker::definition(self : Faker, path : String) -> Json raise {
-  for locale in self.locales {
-    if locale.get(path) is Some(value) {
-      return value
-    }
-  }
-  raise MissingDefinition(path)
+  self
+  .optional_definition(path)
+  .unwrap_or_else(() => raise MissingDefinition(path))
 }
 
 ///|

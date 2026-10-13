@@ -22,7 +22,7 @@ pub fn Faker::vehicle_color(self : Faker) -> String raise {
 fn capitalize(value : String) -> String {
   match value.iter().next() {
     Some(first) =>
-      first.to_string().to_upper() +
+      @unicode.upper(first.to_string()) +
       value[first.to_string().length():].to_owned()
     None => ""
   }

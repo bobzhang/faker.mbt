@@ -32,7 +32,7 @@ test "invalid generation parameters raise errors" {
 }
 
 ///|
-test "locale fallback is per property and explicit null blocks fallback" {
+test "locale fallback is per entry and explicit null blocks fallback" {
   let first = @faker.Locale::from_json({
     "person": { "first_name": { "female": ["A"] }, "suffix": null },
   })
@@ -41,7 +41,12 @@ test "locale fallback is per property and explicit null blocks fallback" {
   })
   let f = @faker.Faker::new(locales=[first, second])
   assert_eq(f.sample("person.first_name.female"), "A")
-  assert_eq(f.sample("person.first_name.male"), "B")
+  try f.sample("person.first_name.male") catch {
+    @faker.MissingDefinition(_) => ()
+    err => raise err
+  } noraise {
+    _ => fail("nested definitions must not merge across locales")
+  }
   json_inspect(f.definition("person.suffix"), content=null)
   try f.sample("missing.path") catch {
     @faker.InvalidArgument(_) | @faker.MissingDefinition(_) => ()

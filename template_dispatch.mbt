@@ -1,6 +1,12 @@
+// Generated supported template method whitelist.
+
 ///|
 fn Faker::dispatch_template(self : Faker, key : String) -> String? raise {
   match key {
+    "airline.aircraftType" => Some(self.airline_aircraft_type())
+    "airline.flightNumber" => Some(self.airline_flight_number())
+    "airline.recordLocator" => Some(self.airline_record_locator())
+    "airline.seat" => Some(self.airline_seat())
     "animal.bear" => Some(self.animal_bear())
     "animal.bird" => Some(self.animal_bird())
     "animal.cat" => Some(self.animal_cat())
@@ -23,44 +29,145 @@ fn Faker::dispatch_template(self : Faker, key : String) -> String? raise {
     "book.publisher" => Some(self.book_publisher())
     "book.series" => Some(self.book_series())
     "book.title" => Some(self.book_title())
+    "color.cssSupportedFunction" => Some(self.color_css_supported_function())
+    "color.cssSupportedSpace" => Some(self.color_css_supported_space())
     "color.human" => Some(self.color_human())
+    "color.rgb" => Some(self.color_rgb())
     "color.space" => Some(self.color_space())
     "commerce.department" => Some(self.commerce_department())
+    "commerce.isbn" => Some(self.commerce_isbn())
+    "commerce.price" => Some(self.commerce_price())
     "commerce.productAdjective" => Some(self.commerce_product_adjective())
+    "commerce.productDescription" => Some(self.commerce_product_description())
     "commerce.productMaterial" => Some(self.commerce_product_material())
+    "commerce.productName" => Some(self.commerce_product_name())
     "commerce.product" => Some(self.commerce_product())
+    "commerce.upc" => Some(self.commerce_upc())
     "company.buzzAdjective" => Some(self.company_buzz_adjective())
     "company.buzzNoun" => Some(self.company_buzz_noun())
+    "company.buzzPhrase" => Some(self.company_buzz_phrase())
     "company.buzzVerb" => Some(self.company_buzz_verb())
     "company.catchPhraseAdjective" =>
       Some(self.company_catch_phrase_adjective())
     "company.catchPhraseDescriptor" =>
       Some(self.company_catch_phrase_descriptor())
     "company.catchPhraseNoun" => Some(self.company_catch_phrase_noun())
+    "company.catchPhrase" => Some(self.company_catch_phrase())
+    "company.name" => Some(self.company_name())
     "database.collation" => Some(self.database_collation())
     "database.column" => Some(self.database_column())
     "database.engine" => Some(self.database_engine())
+    "database.mongodbObjectId" => Some(self.database_mongodb_object_id())
     "database.type" => Some(self.database_type())
+    "datatype.boolean" => Some(self.boolean().to_string())
+    "date.anytime" => Some(self.date_anytime().to_string())
+    "date.birthdate" => Some(self.date_birthdate().to_string())
+    "date.future" => Some(self.date_future().to_string())
+    "date.month" => Some(self.date_month())
+    "date.past" => Some(self.date_past().to_string())
+    "date.recent" => Some(self.date_recent().to_string())
+    "date.soon" => Some(self.date_soon().to_string())
     "date.timeZone" => Some(self.date_time_zone())
+    "date.weekday" => Some(self.date_weekday())
+    "finance.accountName" => Some(self.finance_account_name())
+    "finance.accountNumber" => Some(self.finance_account_number())
+    "finance.amount" => Some(self.finance_amount())
+    "finance.bic" => Some(self.finance_bic())
+    "finance.bitcoinAddress" => Some(self.finance_bitcoin_address())
+    "finance.creditCardCVV" => Some(self.finance_credit_card_cvv())
+    "finance.creditCardIssuer" => Some(self.finance_credit_card_issuer())
+    "finance.creditCardNumber" => Some(self.finance_credit_card_number())
+    "finance.currencyCode" => Some(self.finance_currency_code())
+    "finance.currencyName" => Some(self.finance_currency_name())
+    "finance.currencyNumericCode" => Some(self.finance_currency_numeric_code())
+    "finance.currencySymbol" => Some(self.finance_currency_symbol())
+    "finance.ethereumAddress" => Some(self.finance_ethereum_address())
+    "finance.iban" => Some(self.finance_iban())
+    "finance.litecoinAddress" => Some(self.finance_litecoin_address())
+    "finance.pin" => Some(self.finance_pin())
+    "finance.routingNumber" => Some(self.finance_routing_number())
+    "finance.transactionDescription" =>
+      Some(self.finance_transaction_description())
     "finance.transactionType" => Some(self.finance_transaction_type())
+    "finance.vatNumber" => Some(self.finance_vat_number())
     "food.adjective" => Some(self.food_adjective())
+    "food.description" => Some(self.food_description())
+    "food.dish" => Some(self.food_dish())
     "food.ethnicCategory" => Some(self.food_ethnic_category())
     "food.fruit" => Some(self.food_fruit())
     "food.ingredient" => Some(self.food_ingredient())
     "food.meat" => Some(self.food_meat())
     "food.spice" => Some(self.food_spice())
     "food.vegetable" => Some(self.food_vegetable())
+    "git.branch" => Some(self.git_branch())
+    "git.commitDate" => Some(self.git_commit_date())
+    "git.commitEntry" => Some(self.git_commit_entry())
+    "git.commitMessage" => Some(self.git_commit_message())
+    "git.commitSha" => Some(self.git_commit_sha())
     "hacker.abbreviation" => Some(self.hacker_abbreviation())
     "hacker.adjective" => Some(self.hacker_adjective())
     "hacker.ingverb" => Some(self.hacker_ingverb())
     "hacker.noun" => Some(self.hacker_noun())
+    "hacker.phrase" => Some(self.hacker_phrase())
     "hacker.verb" => Some(self.hacker_verb())
+    "helpers.replaceCreditCardSymbols" =>
+      Some(self.replace_credit_card_symbols())
+    "image.avatarGitHub" => Some(self.image_avatar_git_hub())
+    "image.avatar" => Some(self.image_avatar())
+    "image.dataUri" => Some(self.image_data_uri())
+    "image.personPortrait" => Some(self.image_person_portrait())
+    "image.urlLoremFlickr" => Some(self.image_url_lorem_flickr())
+    "image.urlPicsumPhotos" => Some(self.image_url_picsum_photos())
+    "image.url" => Some(self.image_url())
+    "internet.displayName" => Some(self.internet_display_name())
+    "internet.domainName" => Some(self.internet_domain_name())
     "internet.domainSuffix" => Some(self.internet_domain_suffix())
+    "internet.domainWord" => Some(self.internet_domain_word())
+    "internet.email" => Some(self.internet_email())
+    "internet.emoji" => Some(self.internet_emoji())
+    "internet.exampleEmail" => Some(self.internet_example_email())
+    "internet.httpMethod" => Some(self.internet_http_method())
+    "internet.httpStatusCode" =>
+      Some(self.internet_http_status_code().to_string())
+    "internet.ip" => Some(self.internet_ip())
+    "internet.ipv4" => Some(self.internet_ipv4())
+    "internet.ipv6" => Some(self.internet_ipv6())
     "internet.jwtAlgorithm" => Some(self.internet_jwt_algorithm())
+    "internet.jwt" => Some(self.internet_jwt())
+    "internet.mac" => Some(self.internet_mac())
+    "internet.password" => Some(self.internet_password())
+    "internet.port" => Some(self.internet_port().to_string())
+    "internet.protocol" => Some(self.internet_protocol())
+    "internet.url" => Some(self.internet_url())
+    "internet.userAgent" => Some(self.internet_user_agent())
+    "internet.username" => Some(self.internet_username())
+    "location.buildingNumber" => Some(self.location_building_number())
+    "location.cardinalDirection" => Some(self.location_cardinal_direction())
+    "location.city" => Some(self.location_city())
     "location.continent" => Some(self.location_continent())
+    "location.countryCode" => Some(self.location_country_code())
     "location.country" => Some(self.location_country())
     "location.county" => Some(self.location_county())
+    "location.direction" => Some(self.location_direction())
+    "location.latitude" => Some(self.location_latitude().to_string())
+    "location.longitude" => Some(self.location_longitude().to_string())
+    "location.ordinalDirection" => Some(self.location_ordinal_direction())
+    "location.postalAddress" => Some(self.location_postal_address())
+    "location.secondaryAddress" => Some(self.location_secondary_address())
+    "location.state" => Some(self.location_state())
+    "location.streetAddress" => Some(self.location_street_address())
+    "location.street" => Some(self.location_street())
     "location.timeZone" => Some(self.location_time_zone())
+    "location.zipCode" => Some(self.location_zip_code())
+    "lorem.lines" => Some(self.lorem_lines())
+    "lorem.paragraph" => Some(self.lorem_paragraph())
+    "lorem.paragraphs" => Some(self.lorem_paragraphs())
+    "lorem.sentence" => Some(self.lorem_sentence())
+    "lorem.sentences" => Some(self.lorem_sentences())
+    "lorem.slug" => Some(self.lorem_slug())
+    "lorem.text" => Some(self.lorem_text())
+    "lorem.word" => Some(self.lorem_word())
+    "lorem.words" => Some(self.lorem_words())
     "medical.allergen" => Some(self.medical_allergen())
     "medical.bloodType" => Some(self.medical_blood_type())
     "medical.condition" => Some(self.medical_condition())
@@ -73,55 +180,71 @@ fn Faker::dispatch_template(self : Faker, key : String) -> String? raise {
     "music.artist" => Some(self.music_artist())
     "music.genre" => Some(self.music_genre())
     "music.songName" => Some(self.music_song_name())
+    "number.bigInt" => Some(self.big_int().to_string())
+    "number.binary" => Some(self.number_binary())
+    "number.float" => Some(self.float().to_string())
+    "number.hex" => Some(self.number_hex())
+    "number.int" => Some(self.int().to_string())
+    "number.octal" => Some(self.number_octal())
+    "number.romanNumeral" => Some(self.roman_numeral())
+    "person.bio" => Some(self.person_bio())
+    "person.firstName" => Some(self.person_first_name())
+    "person.fullName" => Some(self.person_full_name())
     "person.gender" => Some(self.person_gender())
     "person.jobArea" => Some(self.person_job_area())
     "person.jobDescriptor" => Some(self.person_job_descriptor())
+    "person.jobTitle" => Some(self.person_job_title())
     "person.jobType" => Some(self.person_job_type())
+    "person.lastName" => Some(self.person_last_name())
+    "person.middleName" => Some(self.person_middle_name())
+    "person.prefix" => Some(self.person_prefix())
     "person.sex" => Some(self.person_sex())
     "person.suffix" => Some(self.person_suffix())
     "person.zodiacSign" => Some(self.person_zodiac_sign())
+    "phone.imei" => Some(self.phone_imei())
+    "phone.number" => Some(self.phone_number())
+    "string.alpha" => Some(self.alpha())
+    "string.alphanumeric" => Some(self.alphanumeric())
+    "string.binary" => Some(self.binary())
+    "string.hexadecimal" => Some(self.hexadecimal())
+    "string.nanoid" => Some(self.nanoid())
+    "string.numeric" => Some(self.numeric())
+    "string.octal" => Some(self.octal())
+    "string.sample" => Some(self.string_sample())
+    "string.symbol" => Some(self.symbol())
+    "string.uuid" => Some(self.uuid())
+    "system.commonFileExt" => Some(self.system_common_file_ext())
+    "system.commonFileName" => Some(self.system_common_file_name())
+    "system.commonFileType" => Some(self.system_common_file_type())
+    "system.cron" => Some(self.system_cron())
+    "system.directoryPath" => Some(self.system_directory_path())
+    "system.fileExt" => Some(self.system_file_ext())
+    "system.fileName" => Some(self.system_file_name())
+    "system.filePath" => Some(self.system_file_path())
+    "system.fileType" => Some(self.system_file_type())
+    "system.mimeType" => Some(self.system_mime_type())
+    "system.networkInterface" => Some(self.system_network_interface())
+    "system.semver" => Some(self.system_semver())
     "vehicle.bicycle" => Some(self.vehicle_bicycle())
+    "vehicle.color" => Some(self.vehicle_color())
     "vehicle.fuel" => Some(self.vehicle_fuel())
     "vehicle.manufacturer" => Some(self.vehicle_manufacturer())
     "vehicle.model" => Some(self.vehicle_model())
     "vehicle.type" => Some(self.vehicle_type())
-    "person.bio" => Some(self.person_bio())
-    "person.jobTitle" => Some(self.person_job_title())
-    "company.name" => Some(self.company_name())
-    "commerce.productName" => Some(self.commerce_product_name())
-    "commerce.productDescription" => Some(self.commerce_product_description())
-    "food.description" => Some(self.food_description())
-    "hacker.phrase" => Some(self.hacker_phrase())
-    "location.city" => Some(self.location_city())
-    "location.street" => Some(self.location_street())
-    "location.postalAddress" => Some(self.location_postal_address())
-    "person.firstName" => Some(self.person_first_name())
-    "person.lastName" => Some(self.person_last_name())
-    "person.middleName" => Some(self.person_middle_name())
-    "person.prefix" => Some(self.person_prefix())
-    "person.fullName" => Some(self.person_full_name())
-    "company.catchPhrase" => Some(self.company_catch_phrase())
-    "company.buzzPhrase" => Some(self.company_buzz_phrase())
-    "location.buildingNumber" => Some(self.location_building_number())
-    "location.secondaryAddress" => Some(self.location_secondary_address())
-    "location.streetAddress" => Some(self.location_street_address())
-    "location.zipCode" => Some(self.location_zip_code())
-    "location.state" => Some(self.location_state())
-    "food.dish" => Some(self.food_dish())
-    "science.chemical_element.name" =>
-      Some(self.science_chemical_element().name)
+    "vehicle.vehicle" => Some(self.vehicle_vehicle())
+    "vehicle.vin" => Some(self.vehicle_vin())
+    "vehicle.vrm" => Some(self.vehicle_vrm())
     "word.adjective" => Some(self.word_adjective())
     "word.adverb" => Some(self.word_adverb())
     "word.conjunction" => Some(self.word_conjunction())
     "word.interjection" => Some(self.word_interjection())
     "word.noun" => Some(self.word_noun())
     "word.preposition" => Some(self.word_preposition())
+    "word.sample" => Some(self.word_sample())
     "word.verb" => Some(self.word_verb())
-    "internet.emoji" => Some(self.internet_emoji())
-    "system.semver" => Some(self.system_semver())
-    "finance.amount" => Some(self.finance_amount())
-    "finance.currencyCode" => Some(self.finance_currency_code())
-    "finance.transactionType" => Some(self.finance_transaction_type())
+    "word.words" => Some(self.word_words())
+    "science.chemical_element.name" =>
+      Some(self.science_chemical_element().name)
     _ => None
   }
 }
@@ -129,121 +252,242 @@ fn Faker::dispatch_template(self : Faker, key : String) -> String? raise {
 ///|
 fn template_has_method(key : String) -> Bool {
   match key {
-    "animal.bear"
-    | "animal.bird"
-    | "animal.cat"
-    | "animal.cetacean"
-    | "animal.cow"
-    | "animal.crocodilia"
-    | "animal.dog"
-    | "animal.fish"
-    | "animal.horse"
-    | "animal.insect"
-    | "animal.lion"
-    | "animal.petName"
-    | "animal.rabbit"
-    | "animal.rodent"
-    | "animal.snake"
-    | "animal.type"
-    | "book.author"
-    | "book.format"
-    | "book.genre"
-    | "book.publisher"
-    | "book.series"
-    | "book.title"
-    | "color.human"
-    | "color.space"
-    | "commerce.department"
-    | "commerce.productAdjective"
-    | "commerce.productMaterial"
-    | "commerce.product"
-    | "company.buzzAdjective"
-    | "company.buzzNoun"
-    | "company.buzzVerb"
-    | "company.catchPhraseAdjective"
-    | "company.catchPhraseDescriptor"
-    | "company.catchPhraseNoun"
-    | "database.collation"
-    | "database.column"
-    | "database.engine"
-    | "database.type"
-    | "date.timeZone"
-    | "finance.transactionType"
-    | "food.adjective"
-    | "food.ethnicCategory"
-    | "food.fruit"
-    | "food.ingredient"
-    | "food.meat"
-    | "food.spice"
-    | "food.vegetable"
-    | "hacker.abbreviation"
-    | "hacker.adjective"
-    | "hacker.ingverb"
-    | "hacker.noun"
-    | "hacker.verb"
-    | "internet.domainSuffix"
-    | "internet.jwtAlgorithm"
-    | "location.continent"
-    | "location.country"
-    | "location.county"
-    | "location.timeZone"
-    | "medical.allergen"
-    | "medical.bloodType"
-    | "medical.condition"
-    | "medical.department"
-    | "medical.drugName"
-    | "medical.procedure"
-    | "medical.specialty"
-    | "medical.symptom"
-    | "music.album"
-    | "music.artist"
-    | "music.genre"
-    | "music.songName"
-    | "person.gender"
-    | "person.jobArea"
-    | "person.jobDescriptor"
-    | "person.jobType"
-    | "person.sex"
-    | "person.suffix"
-    | "person.zodiacSign"
-    | "vehicle.bicycle"
-    | "vehicle.fuel"
-    | "vehicle.manufacturer"
-    | "vehicle.model"
-    | "vehicle.type"
-    | "person.bio"
-    | "person.jobTitle"
-    | "company.name"
-    | "commerce.productName"
-    | "commerce.productDescription"
-    | "food.description"
-    | "hacker.phrase"
-    | "location.city"
-    | "location.street"
-    | "location.postalAddress"
-    | "person.firstName"
-    | "person.lastName"
-    | "person.middleName"
-    | "person.prefix"
-    | "person.fullName"
-    | "company.catchPhrase"
-    | "company.buzzPhrase"
-    | "location.buildingNumber"
-    | "location.secondaryAddress"
-    | "location.streetAddress"
-    | "location.zipCode"
-    | "location.state"
-    | "food.dish"
-    | "science.chemical_element.name"
-    | "word.adjective"
-    | "word.adverb"
-    | "word.conjunction"
-    | "word.interjection"
-    | "word.noun"
-    | "word.preposition"
-    | "word.verb" => true
-    "internet.emoji" | "system.semver" => true
-    "finance.amount" | "finance.currencyCode" | "finance.transactionType" => true
+    "airline.aircraftType" => true
+    "airline.flightNumber" => true
+    "airline.recordLocator" => true
+    "airline.seat" => true
+    "animal.bear" => true
+    "animal.bird" => true
+    "animal.cat" => true
+    "animal.cetacean" => true
+    "animal.cow" => true
+    "animal.crocodilia" => true
+    "animal.dog" => true
+    "animal.fish" => true
+    "animal.horse" => true
+    "animal.insect" => true
+    "animal.lion" => true
+    "animal.petName" => true
+    "animal.rabbit" => true
+    "animal.rodent" => true
+    "animal.snake" => true
+    "animal.type" => true
+    "book.author" => true
+    "book.format" => true
+    "book.genre" => true
+    "book.publisher" => true
+    "book.series" => true
+    "book.title" => true
+    "color.cssSupportedFunction" => true
+    "color.cssSupportedSpace" => true
+    "color.human" => true
+    "color.rgb" => true
+    "color.space" => true
+    "commerce.department" => true
+    "commerce.isbn" => true
+    "commerce.price" => true
+    "commerce.productAdjective" => true
+    "commerce.productDescription" => true
+    "commerce.productMaterial" => true
+    "commerce.productName" => true
+    "commerce.product" => true
+    "commerce.upc" => true
+    "company.buzzAdjective" => true
+    "company.buzzNoun" => true
+    "company.buzzPhrase" => true
+    "company.buzzVerb" => true
+    "company.catchPhraseAdjective" => true
+    "company.catchPhraseDescriptor" => true
+    "company.catchPhraseNoun" => true
+    "company.catchPhrase" => true
+    "company.name" => true
+    "database.collation" => true
+    "database.column" => true
+    "database.engine" => true
+    "database.mongodbObjectId" => true
+    "database.type" => true
+    "datatype.boolean" => true
+    "date.anytime" => true
+    "date.birthdate" => true
+    "date.future" => true
+    "date.month" => true
+    "date.past" => true
+    "date.recent" => true
+    "date.soon" => true
+    "date.timeZone" => true
+    "date.weekday" => true
+    "finance.accountName" => true
+    "finance.accountNumber" => true
+    "finance.amount" => true
+    "finance.bic" => true
+    "finance.bitcoinAddress" => true
+    "finance.creditCardCVV" => true
+    "finance.creditCardIssuer" => true
+    "finance.creditCardNumber" => true
+    "finance.currencyCode" => true
+    "finance.currencyName" => true
+    "finance.currencyNumericCode" => true
+    "finance.currencySymbol" => true
+    "finance.ethereumAddress" => true
+    "finance.iban" => true
+    "finance.litecoinAddress" => true
+    "finance.pin" => true
+    "finance.routingNumber" => true
+    "finance.transactionDescription" => true
+    "finance.transactionType" => true
+    "finance.vatNumber" => true
+    "food.adjective" => true
+    "food.description" => true
+    "food.dish" => true
+    "food.ethnicCategory" => true
+    "food.fruit" => true
+    "food.ingredient" => true
+    "food.meat" => true
+    "food.spice" => true
+    "food.vegetable" => true
+    "git.branch" => true
+    "git.commitDate" => true
+    "git.commitEntry" => true
+    "git.commitMessage" => true
+    "git.commitSha" => true
+    "hacker.abbreviation" => true
+    "hacker.adjective" => true
+    "hacker.ingverb" => true
+    "hacker.noun" => true
+    "hacker.phrase" => true
+    "hacker.verb" => true
+    "helpers.replaceCreditCardSymbols" => true
+    "image.avatarGitHub" => true
+    "image.avatar" => true
+    "image.dataUri" => true
+    "image.personPortrait" => true
+    "image.urlLoremFlickr" => true
+    "image.urlPicsumPhotos" => true
+    "image.url" => true
+    "internet.displayName" => true
+    "internet.domainName" => true
+    "internet.domainSuffix" => true
+    "internet.domainWord" => true
+    "internet.email" => true
+    "internet.emoji" => true
+    "internet.exampleEmail" => true
+    "internet.httpMethod" => true
+    "internet.httpStatusCode" => true
+    "internet.ip" => true
+    "internet.ipv4" => true
+    "internet.ipv6" => true
+    "internet.jwtAlgorithm" => true
+    "internet.jwt" => true
+    "internet.mac" => true
+    "internet.password" => true
+    "internet.port" => true
+    "internet.protocol" => true
+    "internet.url" => true
+    "internet.userAgent" => true
+    "internet.username" => true
+    "location.buildingNumber" => true
+    "location.cardinalDirection" => true
+    "location.city" => true
+    "location.continent" => true
+    "location.countryCode" => true
+    "location.country" => true
+    "location.county" => true
+    "location.direction" => true
+    "location.latitude" => true
+    "location.longitude" => true
+    "location.ordinalDirection" => true
+    "location.postalAddress" => true
+    "location.secondaryAddress" => true
+    "location.state" => true
+    "location.streetAddress" => true
+    "location.street" => true
+    "location.timeZone" => true
+    "location.zipCode" => true
+    "lorem.lines" => true
+    "lorem.paragraph" => true
+    "lorem.paragraphs" => true
+    "lorem.sentence" => true
+    "lorem.sentences" => true
+    "lorem.slug" => true
+    "lorem.text" => true
+    "lorem.word" => true
+    "lorem.words" => true
+    "medical.allergen" => true
+    "medical.bloodType" => true
+    "medical.condition" => true
+    "medical.department" => true
+    "medical.drugName" => true
+    "medical.procedure" => true
+    "medical.specialty" => true
+    "medical.symptom" => true
+    "music.album" => true
+    "music.artist" => true
+    "music.genre" => true
+    "music.songName" => true
+    "number.bigInt" => true
+    "number.binary" => true
+    "number.float" => true
+    "number.hex" => true
+    "number.int" => true
+    "number.octal" => true
+    "number.romanNumeral" => true
+    "person.bio" => true
+    "person.firstName" => true
+    "person.fullName" => true
+    "person.gender" => true
+    "person.jobArea" => true
+    "person.jobDescriptor" => true
+    "person.jobTitle" => true
+    "person.jobType" => true
+    "person.lastName" => true
+    "person.middleName" => true
+    "person.prefix" => true
+    "person.sex" => true
+    "person.suffix" => true
+    "person.zodiacSign" => true
+    "phone.imei" => true
+    "phone.number" => true
+    "string.alpha" => true
+    "string.alphanumeric" => true
+    "string.binary" => true
+    "string.hexadecimal" => true
+    "string.nanoid" => true
+    "string.numeric" => true
+    "string.octal" => true
+    "string.sample" => true
+    "string.symbol" => true
+    "string.uuid" => true
+    "system.commonFileExt" => true
+    "system.commonFileName" => true
+    "system.commonFileType" => true
+    "system.cron" => true
+    "system.directoryPath" => true
+    "system.fileExt" => true
+    "system.fileName" => true
+    "system.filePath" => true
+    "system.fileType" => true
+    "system.mimeType" => true
+    "system.networkInterface" => true
+    "system.semver" => true
+    "vehicle.bicycle" => true
+    "vehicle.color" => true
+    "vehicle.fuel" => true
+    "vehicle.manufacturer" => true
+    "vehicle.model" => true
+    "vehicle.type" => true
+    "vehicle.vehicle" => true
+    "vehicle.vin" => true
+    "vehicle.vrm" => true
+    "word.adjective" => true
+    "word.adverb" => true
+    "word.conjunction" => true
+    "word.interjection" => true
+    "word.noun" => true
+    "word.preposition" => true
+    "word.sample" => true
+    "word.verb" => true
+    "word.words" => true
+    "science.chemical_element.name" => true
     _ => false
   }
 }

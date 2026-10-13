@@ -75,7 +75,13 @@ fn Faker::template_value(self : Faker, key : String) -> String raise {
     guard args.strip_suffix(")") is Some(args) else {
       raise InvalidArgument("invalid template arguments")
     }
+    if args.is_empty() {
+      return self.template_value(method_name.to_owned())
+    }
     let args = @json.parse(args)
+    if self.optional_definition(method_name.to_owned()) is Some(Array(values)) {
+      ignore(self.array_element(values))
+    }
     match method_name {
       "number.int" => {
         let low = match args {
