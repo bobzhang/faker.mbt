@@ -119,6 +119,9 @@ fn Faker::dispatch_template(self : Faker, key : String) -> String? raise {
     "word.verb" => Some(self.word_verb())
     "internet.emoji" => Some(self.internet_emoji())
     "system.semver" => Some(self.system_semver())
+    "finance.amount" => Some(self.finance_amount())
+    "finance.currencyCode" => Some(self.finance_currency_code())
+    "finance.transactionType" => Some(self.finance_transaction_type())
     _ => None
   }
 }
@@ -240,6 +243,7 @@ fn template_has_method(key : String) -> Bool {
     | "word.preposition"
     | "word.verb" => true
     "internet.emoji" | "system.semver" => true
+    "finance.amount" | "finance.currencyCode" | "finance.transactionType" => true
     _ => false
   }
 }

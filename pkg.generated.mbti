@@ -9,6 +9,8 @@ import {
 // Values
 pub fn date_iso(Int64) -> String raise
 
+pub fn luhn_valid(String) -> Bool
+
 pub fn[T] multiple(() -> T raise, count? : Int) -> Array[T] raise
 
 pub fn mustache(String, Map[String, () -> String raise]) -> String raise
@@ -107,11 +109,14 @@ pub fn Faker::boolean(Self, probability? : Double) -> Bool raise
 pub fn Faker::color_human(Self) -> String raise
 pub fn Faker::color_space(Self) -> String raise
 pub fn Faker::commerce_department(Self) -> String raise
+pub fn Faker::commerce_isbn(Self, variant? : Int, separator? : String) -> String raise
+pub fn Faker::commerce_price(Self, min? : Double, max? : Double, decimals? : Int, symbol? : String) -> String raise
 pub fn Faker::commerce_product(Self) -> String raise
 pub fn Faker::commerce_product_adjective(Self) -> String raise
 pub fn Faker::commerce_product_description(Self) -> String raise
 pub fn Faker::commerce_product_material(Self) -> String raise
 pub fn Faker::commerce_product_name(Self) -> String raise
+pub fn Faker::commerce_upc(Self, prefix? : String) -> String raise
 pub fn Faker::company_buzz_adjective(Self) -> String raise
 pub fn Faker::company_buzz_noun(Self) -> String raise
 pub fn Faker::company_buzz_phrase(Self) -> String raise
@@ -139,8 +144,27 @@ pub fn Faker::date_time_zone(Self) -> String raise
 pub fn Faker::date_weekday(Self, abbreviated? : Bool, context? : Bool) -> String raise
 pub fn Faker::definition(Self, String) -> Json raise
 pub fn Faker::fake(Self, String) -> String raise
+pub fn Faker::finance_account_name(Self) -> String raise
+pub fn Faker::finance_account_number(Self, length? : Int) -> String raise
+pub fn Faker::finance_amount(Self, min? : Double, max? : Double, decimals? : Int, symbol? : String) -> String raise
+pub fn Faker::finance_bic(Self, include_branch_code? : Bool) -> String raise
+pub fn Faker::finance_bitcoin_address(Self, family? : String, testnet? : Bool) -> String raise
+pub fn Faker::finance_credit_card_cvv(Self) -> String raise
+pub fn Faker::finance_credit_card_issuer(Self) -> String raise
+pub fn Faker::finance_credit_card_number(Self, issuer? : String) -> String raise
 pub fn Faker::finance_currency(Self) -> Currency raise
+pub fn Faker::finance_currency_code(Self) -> String raise
+pub fn Faker::finance_currency_name(Self) -> String raise
+pub fn Faker::finance_currency_numeric_code(Self) -> String raise
+pub fn Faker::finance_currency_symbol(Self) -> String raise
+pub fn Faker::finance_ethereum_address(Self) -> String raise
+pub fn Faker::finance_iban(Self, country_code? : String, formatted? : Bool) -> String raise
+pub fn Faker::finance_litecoin_address(Self) -> String raise
+pub fn Faker::finance_pin(Self, length? : Int) -> String raise
+pub fn Faker::finance_routing_number(Self) -> String raise
+pub fn Faker::finance_transaction_description(Self) -> String raise
 pub fn Faker::finance_transaction_type(Self) -> String raise
+pub fn Faker::finance_vat_number(Self, country_code? : String) -> String raise
 pub fn Faker::float(Self, min? : Double, max? : Double, multiple_of? : Double, fraction_digits? : Int) -> Double raise
 pub fn Faker::food_adjective(Self) -> String raise
 pub fn Faker::food_description(Self) -> String raise
@@ -152,6 +176,7 @@ pub fn Faker::food_meat(Self) -> String raise
 pub fn Faker::food_spice(Self) -> String raise
 pub fn Faker::food_vegetable(Self) -> String raise
 pub fn Faker::from_characters(Self, String, length? : Int) -> String raise
+pub fn Faker::from_reg_exp(Self, String, ignore_case? : Bool) -> String raise
 pub fn Faker::git_branch(Self) -> String raise
 pub fn Faker::git_commit_message(Self) -> String raise
 pub fn Faker::git_commit_sha(Self, length? : Int) -> String raise
@@ -247,8 +272,10 @@ pub fn Faker::person_sex(Self) -> String raise
 pub fn Faker::person_sex_type(Self, include_generic? : Bool) -> Sex raise
 pub fn Faker::person_suffix(Self) -> String raise
 pub fn Faker::person_zodiac_sign(Self) -> String raise
+pub fn Faker::phone_imei(Self) -> String raise
 pub fn Faker::phone_number(Self, style? : String) -> String raise
 pub fn Faker::random(Self) -> Double
+pub fn Faker::replace_credit_card_symbols(Self, pattern? : String, symbol? : Char) -> String raise
 pub fn Faker::replace_symbols(Self, String) -> String raise
 pub fn Faker::roman_numeral(Self, min? : Int, max? : Int) -> String raise
 pub fn Faker::sample(Self, String) -> String raise
@@ -283,6 +310,8 @@ pub fn Faker::vehicle_manufacturer(Self) -> String raise
 pub fn Faker::vehicle_model(Self) -> String raise
 pub fn Faker::vehicle_type(Self) -> String raise
 pub fn Faker::vehicle_vehicle(Self) -> String raise
+pub fn Faker::vehicle_vin(Self) -> String raise
+pub fn Faker::vehicle_vrm(Self) -> String raise
 pub fn[T] Faker::weighted_array_element(Self, ArrayView[(Double, T)]) -> T raise
 pub fn Faker::word_adjective(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
 pub fn Faker::word_adverb(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise

@@ -138,3 +138,16 @@ fixtures('date_parity_test.mbt', [
  ['f.date_month()', f=>f.date.month()],
  ['f.date_weekday(abbreviated=true)', f=>f.date.weekday({abbreviated:true})],
 ]);
+fixtures('finance_parity_test.mbt', [
+ ...['accountName','accountNumber','amount','bic','bitcoinAddress','creditCardCvv','creditCardIssuer','creditCardNumber','currencyCode','currencyName','currencyNumericCode','currencySymbol','ethereumAddress','iban','litecoinAddress','pin','routingNumber','vatNumber'].map(method => [`f.finance_${method.replace(/[A-Z]/g,c=>'_'+c.toLowerCase())}()`, f=>f.finance[method === "creditCardCvv" ? "creditCardCVV" : method]()]),
+ ['f.finance_iban(country_code="GB", formatted=true)', f=>f.finance.iban({countryCode:'GB',formatted:true})],
+ ['f.commerce_price()', f=>f.commerce.price()],
+ ['f.commerce_isbn()', f=>f.commerce.isbn()],
+ ['f.commerce_isbn(variant=10)', f=>f.commerce.isbn(10)],
+ ['f.commerce_upc()', f=>f.commerce.upc()],
+ ['f.vehicle_vin()', f=>f.vehicle.vin()],
+ ['f.vehicle_vrm()', f=>f.vehicle.vrm()],
+ ['f.phone_imei()', f=>f.phone.imei()],
+ ['f.from_reg_exp("[A-Z]{2}[0-9]{4,8}W{0,1}")', f=>f.helpers.fromRegExp('[A-Z]{2}[0-9]{4,8}W{0,1}')],
+ ['f.from_reg_exp("[A-D]{3}x?", ignore_case=true)', f=>f.helpers.fromRegExp(/[A-D]{3}x?/i)],
+]);
