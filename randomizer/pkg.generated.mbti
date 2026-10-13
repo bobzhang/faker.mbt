@@ -1,0 +1,22 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dii/faker/randomizer"
+
+// Values
+
+// Errors
+
+// Types and methods
+pub struct Randomizer {
+  state : FixedArray[UInt]
+  mut index : Int
+}
+pub fn Randomizer::new(seed? : UInt) -> Self
+pub fn Randomizer::next(Self) -> Double
+pub fn Randomizer::next_f32(Self) -> Double
+pub fn Randomizer::next_u32(Self) -> UInt
+pub fn Randomizer::seed(Self, UInt) -> Unit
+pub fn Randomizer::seed_array(Self, ArrayView[UInt]) -> Unit
+
+// Type aliases
+
+// Traits
