@@ -9,14 +9,21 @@ package "dii/faker/randomizer"
 pub struct Randomizer {
   state : FixedArray[UInt]
   mut index : Int
+  precision32 : Bool
 }
-pub fn Randomizer::new(seed? : UInt) -> Self
+pub fn Randomizer::new(seed? : UInt, precision32? : Bool) -> Self
 pub fn Randomizer::next(Self) -> Double
 pub fn Randomizer::next_f32(Self) -> Double
 pub fn Randomizer::next_u32(Self) -> UInt
 pub fn Randomizer::seed(Self, UInt) -> Unit
 pub fn Randomizer::seed_array(Self, ArrayView[UInt]) -> Unit
+pub impl RandomSource for Randomizer
 
 // Type aliases
 
 // Traits
+pub(open) trait RandomSource {
+  fn next(Self) -> Double
+  fn seed(Self, UInt) -> Unit
+  fn seed_array(Self, ArrayView[UInt]) -> Unit
+}

@@ -14,7 +14,7 @@ pub fn color_css(ArrayView[Double], model? : String, space? : String) -> String 
 
 pub fn date_iso(Int64) -> String raise
 
-pub fn exponential_distributor(base? : Double, bias? : Double) -> ((@randomizer.Randomizer) -> Double) raise
+pub fn exponential_distributor(base? : Double, bias? : Double) -> ((&@randomizer.RandomSource) -> Double) raise
 
 pub fn luhn_valid(String) -> Bool
 
@@ -24,7 +24,7 @@ pub fn mustache(String, Map[String, () -> String raise]) -> String raise
 
 pub fn slugify(String) -> String
 
-pub fn uniform_distributor() -> (@randomizer.Randomizer) -> Double
+pub fn uniform_distributor() -> (&@randomizer.RandomSource) -> Double
 
 // Errors
 pub suberror FakerError {
@@ -74,7 +74,7 @@ pub struct Currency {
 pub fn Currency::to_json(Self) -> Json
 
 pub struct Faker {
-  randomizer : @randomizer.Randomizer
+  randomizer : &@randomizer.RandomSource
   locales : Array[@locale.Locale]
   mut template_depth : Int
   mut ref_date : Int64
@@ -186,7 +186,7 @@ pub fn Faker::finance_routing_number(Self) -> String raise
 pub fn Faker::finance_transaction_description(Self) -> String raise
 pub fn Faker::finance_transaction_type(Self) -> String raise
 pub fn Faker::finance_vat_number(Self, country_code? : String) -> String raise
-pub fn Faker::float(Self, min? : Double, max? : Double, multiple_of? : Double, fraction_digits? : Int, distributor? : (@randomizer.Randomizer) -> Double) -> Double raise
+pub fn Faker::float(Self, min? : Double, max? : Double, multiple_of? : Double, fraction_digits? : Int, distributor? : (&@randomizer.RandomSource) -> Double) -> Double raise
 pub fn Faker::food_adjective(Self) -> String raise
 pub fn Faker::food_description(Self) -> String raise
 pub fn Faker::food_dish(Self) -> String raise
@@ -217,7 +217,7 @@ pub fn Faker::image_person_portrait(Self, size? : Int, sex? : Sex) -> String rai
 pub fn Faker::image_url(Self, width? : Int, height? : Int) -> String raise
 pub fn Faker::image_url_lorem_flickr(Self, width? : Int, height? : Int, category? : String) -> String raise
 pub fn Faker::image_url_picsum_photos(Self, width? : Int, height? : Int, grayscale? : Bool, blur? : Int) -> String raise
-pub fn Faker::int(Self, min? : Int, max? : Int, multiple_of? : Int, distributor? : (@randomizer.Randomizer) -> Double) -> Int raise
+pub fn Faker::int(Self, min? : Int, max? : Int, multiple_of? : Int, distributor? : (&@randomizer.RandomSource) -> Double) -> Int raise
 pub fn Faker::int64(Self, min? : Int64, max? : Int64) -> Int64 raise
 pub fn Faker::internet_display_name(Self, first_name? : String, last_name? : String) -> String raise
 pub fn Faker::internet_domain_name(Self) -> String raise
@@ -283,7 +283,7 @@ pub fn Faker::music_artist(Self) -> String raise
 pub fn Faker::music_genre(Self) -> String raise
 pub fn Faker::music_song_name(Self) -> String raise
 pub fn Faker::nanoid(Self, length? : Int) -> String raise
-pub fn Faker::new(seed? : UInt, locales? : Array[@locale.Locale], randomizer? : @randomizer.Randomizer) -> Self
+pub fn Faker::new(seed? : UInt, locales? : Array[@locale.Locale], randomizer? : &@randomizer.RandomSource) -> Self
 pub fn Faker::number_binary(Self, min? : Int, max? : Int) -> String raise
 pub fn Faker::number_hex(Self, min? : Int, max? : Int) -> String raise
 pub fn Faker::number_octal(Self, min? : Int, max? : Int) -> String raise
@@ -395,5 +395,7 @@ pub(all) enum Sex {
 pub using @locale {type Locale}
 
 pub using @randomizer {type Randomizer}
+
+pub using @randomizer {trait RandomSource}
 
 // Traits

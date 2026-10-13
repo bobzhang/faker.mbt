@@ -6,7 +6,7 @@ pub fn Faker::int(
   min~ : Int32 = 0,
   max~ : Int32 = 2147483647,
   multiple_of~ : Int32 = 1,
-  distributor? : (Randomizer) -> Double,
+  distributor? : (&RandomSource) -> Double,
 ) -> Int32 raise {
   guard multiple_of > 0 else {
     raise InvalidArgument("multiple_of must be positive")
@@ -31,7 +31,7 @@ pub fn Faker::float(
   max~ : Double = 1,
   multiple_of? : Double,
   fraction_digits? : Int32,
-  distributor? : (Randomizer) -> Double,
+  distributor? : (&RandomSource) -> Double,
 ) -> Double raise {
   guard !min.is_nan() &&
     !max.is_nan() &&

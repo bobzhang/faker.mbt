@@ -3,11 +3,15 @@
 pub struct Randomizer {
   state : FixedArray[UInt32]
   mut index : Int32
+  precision32 : Bool
 }
 
 ///|
-pub fn Randomizer::new(seed~ : UInt32 = 5489) -> Randomizer {
-  let self = { state: FixedArray::make(624, 0), index: 624, }
+pub fn Randomizer::new(
+  seed~ : UInt32 = 5489,
+  precision32~ : Bool = false,
+) -> Randomizer {
+  let self = { state: FixedArray::make(624, 0), index: 624, precision32, }
   self.seed(seed)
   self
 }
@@ -96,6 +100,9 @@ pub fn Randomizer::next_f32(self : Randomizer) -> Double {
 ///|
 /// A uniformly distributed value in [0, 1), using 53 random bits.
 pub fn Randomizer::next(self : Randomizer) -> Double {
+  if self.precision32 {
+    return self.next_f32()
+  }
   let high = self.next_u32() >> 5
   let low = self.next_u32() >> 6
   (high.to_double() * 67108864.0 + low.to_double()) / 9007199254740992.0

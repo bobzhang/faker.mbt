@@ -1,5 +1,5 @@
 ///|
-pub fn uniform_distributor() -> (Randomizer) -> Double {
+pub fn uniform_distributor() -> (&RandomSource) -> Double {
   rng => rng.next()
 }
 
@@ -7,7 +7,7 @@ pub fn uniform_distributor() -> (Randomizer) -> Double {
 pub fn exponential_distributor(
   base? : Double,
   bias~ : Double = -1,
-) -> ((Randomizer) -> Double) raise {
+) -> ((&RandomSource) -> Double) raise {
   let base = base.unwrap_or_else(() => {
     if bias <= 0 {
       -bias + 1
@@ -27,7 +27,7 @@ pub fn exponential_distributor(
 ///|
 fn Faker::distributed(
   self : Faker,
-  distributor : ((Randomizer) -> Double)?,
+  distributor : ((&RandomSource) -> Double)?,
 ) -> Double raise {
   let value = match distributor {
     Some(f) => f(self.randomizer)
