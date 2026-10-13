@@ -142,8 +142,26 @@ pub fn Faker::hacker_phrase(Self) -> String raise
 pub fn Faker::hacker_verb(Self) -> String raise
 pub fn Faker::hexadecimal(Self, length? : Int, prefix? : String, casing? : Casing) -> String raise
 pub fn Faker::int(Self, min? : Int, max? : Int, multiple_of? : Int) -> Int raise
+pub fn Faker::internet_display_name(Self, first_name? : String, last_name? : String) -> String raise
+pub fn Faker::internet_domain_name(Self) -> String raise
 pub fn Faker::internet_domain_suffix(Self) -> String raise
+pub fn Faker::internet_domain_word(Self) -> String raise
+pub fn Faker::internet_email(Self, first_name? : String, last_name? : String, provider? : String, allow_special_characters? : Bool) -> String raise
+pub fn Faker::internet_emoji(Self, types? : Array[String]) -> String raise
+pub fn Faker::internet_example_email(Self, first_name? : String, last_name? : String) -> String raise
+pub fn Faker::internet_http_method(Self) -> String raise
+pub fn Faker::internet_http_status_code(Self, types? : Array[String]) -> Int raise
+pub fn Faker::internet_ip(Self) -> String raise
+pub fn Faker::internet_ipv4(Self, cidr? : String) -> String raise
+pub fn Faker::internet_ipv6(Self) -> String raise
 pub fn Faker::internet_jwt_algorithm(Self) -> String raise
+pub fn Faker::internet_mac(Self, separator? : String) -> String raise
+pub fn Faker::internet_password(Self, length? : Int, memorable? : Bool, prefix? : String) -> String raise
+pub fn Faker::internet_port(Self) -> Int raise
+pub fn Faker::internet_protocol(Self) -> String raise
+pub fn Faker::internet_url(Self, protocol? : String, append_slash? : Bool) -> String raise
+pub fn Faker::internet_user_agent(Self) -> String raise
+pub fn Faker::internet_username(Self, first_name? : String, last_name? : String) -> String raise
 pub fn Faker::location_building_number(Self) -> String raise
 pub fn Faker::location_cardinal_direction(Self, abbreviated? : Bool) -> String raise
 pub fn Faker::location_city(Self) -> String raise

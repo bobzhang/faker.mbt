@@ -97,3 +97,21 @@ fixtures('text_parity_test.mbt', [
  ['f.lorem_lines()', f => f.lorem.lines()],
  ['f.lorem_text()', f => f.lorem.text()],
 ]);
+fixtures('internet_parity_test.mbt', [
+ ['f.internet_display_name()', f => f.internet.displayName()],
+ ['f.internet_username()', f => f.internet.username()],
+ ['f.internet_username(first_name="Élodie张", last_name="ЖуковÅ")', f => f.internet.username({firstName:'Élodie张',lastName:'ЖуковÅ'})],
+ ['f.internet_email()', f => f.internet.email()],
+ ['f.internet_example_email()', f => f.internet.exampleEmail()],
+ ['f.internet_domain_word()', f => f.internet.domainWord()],
+ ['f.internet_url()', f => f.internet.url()],
+ ['f.internet_emoji()', f => f.internet.emoji()],
+ ['f.internet_http_status_code()', f => f.internet.httpStatusCode()],
+ ['f.internet_ipv4()', f => f.internet.ipv4()],
+ ['f.internet_ipv4(cidr="192.168.1.42/24")', f => f.internet.ipv4({cidrBlock:'192.168.1.42/24'})],
+ ['f.internet_ipv6()', f => f.internet.ipv6()],
+ ['f.internet_ip()', f => f.internet.ip()],
+ ['f.internet_mac()', f => f.internet.mac()],
+ ['f.internet_password()', f => f.internet.password()],
+ ['f.internet_password(memorable=true)', f => f.internet.password({memorable:true})],
+]);
