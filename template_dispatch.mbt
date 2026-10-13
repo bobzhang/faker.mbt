@@ -117,6 +117,8 @@ fn Faker::dispatch_template(self : Faker, key : String) -> String? raise {
     "word.noun" => Some(self.word_noun())
     "word.preposition" => Some(self.word_preposition())
     "word.verb" => Some(self.word_verb())
+    "internet.emoji" => Some(self.internet_emoji())
+    "system.semver" => Some(self.system_semver())
     _ => None
   }
 }
@@ -237,6 +239,7 @@ fn template_has_method(key : String) -> Bool {
     | "word.noun"
     | "word.preposition"
     | "word.verb" => true
+    "internet.emoji" | "system.semver" => true
     _ => false
   }
 }

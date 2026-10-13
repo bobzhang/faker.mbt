@@ -115,3 +115,16 @@ fixtures('internet_parity_test.mbt', [
  ['f.internet_password()', f => f.internet.password()],
  ['f.internet_password(memorable=true)', f => f.internet.password({memorable:true})],
 ]);
+fixtures('system_parity_test.mbt', [
+ ...['mimeType','fileType','fileExt','fileName','filePath','commonFileExt','commonFileType','commonFileName','networkInterface','semver','cron'].map(method => [`f.system_${method.replace(/[A-Z]/g,c=>'_'+c.toLowerCase())}()`, f=>f.system[method]()]),
+ ['f.airline_seat()', f=>f.airline.seat()],
+ ['f.airline_flight_number()', f=>f.airline.flightNumber()],
+ ['f.airline_record_locator()', f=>f.airline.recordLocator()],
+ ['f.phone_number()', f=>f.phone.number()],
+ ['f.git_branch()', f=>f.git.branch()],
+ ['f.git_commit_message()', f=>f.git.commitMessage()],
+ ['f.git_commit_sha()', f=>f.git.commitSha()],
+ ['f.database_mongodb_object_id()', f=>f.database.mongodbObjectId()],
+ ['f.person_bio()', f=>f.person.bio()],
+ ['f.internet_user_agent()', f=>f.internet.userAgent()],
+]);

@@ -65,9 +65,13 @@ pub struct Faker {
   locales : Array[@locale.Locale]
   mut template_depth : Int
 }
+pub fn Faker::airline_aircraft_type(Self) -> String raise
 pub fn Faker::airline_airline(Self) -> Airline raise
 pub fn Faker::airline_airplane(Self) -> Airplane raise
 pub fn Faker::airline_airport(Self) -> Airport raise
+pub fn Faker::airline_flight_number(Self, length? : Int, add_leading_zeros? : Bool) -> String raise
+pub fn Faker::airline_record_locator(Self, allow_numerics? : Bool, allow_visually_similar? : Bool) -> String raise
+pub fn Faker::airline_seat(Self, aircraft_type? : String) -> String raise
 pub fn Faker::alpha(Self, length? : Int, casing? : Casing, exclude? : String) -> String raise
 pub fn Faker::alphanumeric(Self, length? : Int, casing? : Casing, exclude? : String) -> String raise
 pub fn Faker::animal_bear(Self) -> String raise
@@ -117,6 +121,7 @@ pub fn Faker::company_name(Self) -> String raise
 pub fn Faker::database_collation(Self) -> String raise
 pub fn Faker::database_column(Self) -> String raise
 pub fn Faker::database_engine(Self) -> String raise
+pub fn Faker::database_mongodb_object_id(Self) -> String raise
 pub fn Faker::database_type(Self) -> String raise
 pub fn Faker::date_time_zone(Self) -> String raise
 pub fn Faker::definition(Self, String) -> Json raise
@@ -134,6 +139,9 @@ pub fn Faker::food_meat(Self) -> String raise
 pub fn Faker::food_spice(Self) -> String raise
 pub fn Faker::food_vegetable(Self) -> String raise
 pub fn Faker::from_characters(Self, String, length? : Int) -> String raise
+pub fn Faker::git_branch(Self) -> String raise
+pub fn Faker::git_commit_message(Self) -> String raise
+pub fn Faker::git_commit_sha(Self, length? : Int) -> String raise
 pub fn Faker::hacker_abbreviation(Self) -> String raise
 pub fn Faker::hacker_adjective(Self) -> String raise
 pub fn Faker::hacker_ingverb(Self) -> String raise
@@ -225,6 +233,7 @@ pub fn Faker::person_sex(Self) -> String raise
 pub fn Faker::person_sex_type(Self, include_generic? : Bool) -> Sex raise
 pub fn Faker::person_suffix(Self) -> String raise
 pub fn Faker::person_zodiac_sign(Self) -> String raise
+pub fn Faker::phone_number(Self, style? : String) -> String raise
 pub fn Faker::random(Self) -> Double
 pub fn Faker::replace_symbols(Self, String) -> String raise
 pub fn Faker::roman_numeral(Self, min? : Int, max? : Int) -> String raise
@@ -236,6 +245,18 @@ pub fn Faker::seed_array(Self, ArrayView[UInt]) -> Unit
 pub fn[T] Faker::shuffle(Self, ArrayView[T]) -> Array[T] raise
 pub fn Faker::string_sample(Self, length? : Int) -> String raise
 pub fn Faker::symbol(Self, length? : Int) -> String raise
+pub fn Faker::system_common_file_ext(Self) -> String raise
+pub fn Faker::system_common_file_name(Self, extension? : String) -> String raise
+pub fn Faker::system_common_file_type(Self) -> String raise
+pub fn Faker::system_cron(Self, include_year? : Bool, include_non_standard? : Bool) -> String raise
+pub fn Faker::system_directory_path(Self) -> String raise
+pub fn Faker::system_file_ext(Self, mime_type? : String) -> String raise
+pub fn Faker::system_file_name(Self, extension_count? : Int) -> String raise
+pub fn Faker::system_file_path(Self) -> String raise
+pub fn Faker::system_file_type(Self) -> String raise
+pub fn Faker::system_mime_type(Self) -> String raise
+pub fn Faker::system_network_interface(Self, interface_type? : String, schema? : String) -> String raise
+pub fn Faker::system_semver(Self) -> String raise
 pub fn Faker::ulid(Self, Int64) -> String raise
 pub fn[T : Eq] Faker::unique_array(Self, ArrayView[T], Int) -> Array[T] raise
 pub fn Faker::uuid(Self) -> String raise
