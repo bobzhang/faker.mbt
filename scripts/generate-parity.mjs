@@ -11,7 +11,8 @@ export function fixtures(file, cases) {
     output += `///|\ntest "upstream parity seed ${seed}" {\n  let f = @faker.Faker::new(seed=${seed})\n`;
     for (const [moon, generate] of cases) {
       faker.seed(seed);
-      const expected = generate(faker);
+      let expected = generate(faker);
+      if (file === "date_parity_test.mbt") expected = Array.isArray(expected) ? expected.map(String) : String(expected);
       output += `  f.seed(${seed})\n  json_inspect(${moon}, content=${JSON.stringify(expected)})\n`;
     }
     output += '}\n\n';
@@ -127,4 +128,13 @@ fixtures('system_parity_test.mbt', [
  ['f.database_mongodb_object_id()', f=>f.database.mongodbObjectId()],
  ['f.person_bio()', f=>f.person.bio()],
  ['f.internet_user_agent()', f=>f.internet.userAgent()],
+]);
+fixtures('date_parity_test.mbt', [
+ ['f.date_between(0L, 1893456000000L)', f=>f.date.between({from:0,to:1893456000000}).valueOf()],
+ ['f.date_betweens(0L, 1893456000000L)', f=>f.date.betweens({from:0,to:1893456000000}).map(x=>x.valueOf())],
+ ...['anytime','recent','soon','past','future','birthdate'].map(name=>[`f.date_${name}()`,f=>f.date[name]({refDate:1577836800000}).valueOf()]),
+ ['f.date_birthdate(min=1900, max=2000, mode="year")', f=>f.date.birthdate({min:1900,max:2000,mode:'year',refDate:1577836800000}).valueOf()],
+ ['f.date_past(years=4, ref_date=1709208000000L)', f=>f.date.past({years:4,refDate:1709208000000}).valueOf()],
+ ['f.date_month()', f=>f.date.month()],
+ ['f.date_weekday(abbreviated=true)', f=>f.date.weekday({abbreviated:true})],
 ]);

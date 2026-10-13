@@ -18,6 +18,7 @@ pub struct Faker {
   randomizer : Randomizer
   locales : Array[Locale]
   mut template_depth : Int32
+  mut ref_date : Int64
 }
 
 ///|
@@ -32,6 +33,7 @@ pub fn Faker::new(
     randomizer: randomizer.unwrap_or_else(() => Randomizer::new(seed~)),
     locales: locales.copy(),
     template_depth: 0,
+    ref_date: 1577836800000L,
   }
 }
 

@@ -7,6 +7,8 @@ import {
 }
 
 // Values
+pub fn date_iso(Int64) -> String raise
+
 pub fn[T] multiple(() -> T raise, count? : Int) -> Array[T] raise
 
 pub fn mustache(String, Map[String, () -> String raise]) -> String raise
@@ -64,6 +66,7 @@ pub struct Faker {
   randomizer : @randomizer.Randomizer
   locales : Array[@locale.Locale]
   mut template_depth : Int
+  mut ref_date : Int64
 }
 pub fn Faker::airline_aircraft_type(Self) -> String raise
 pub fn Faker::airline_airline(Self) -> Airline raise
@@ -123,7 +126,17 @@ pub fn Faker::database_column(Self) -> String raise
 pub fn Faker::database_engine(Self) -> String raise
 pub fn Faker::database_mongodb_object_id(Self) -> String raise
 pub fn Faker::database_type(Self) -> String raise
+pub fn Faker::date_anytime(Self, ref_date? : Int64) -> Int64 raise
+pub fn Faker::date_between(Self, Int64, Int64) -> Int64 raise
+pub fn Faker::date_betweens(Self, Int64, Int64, count? : Int) -> Array[Int64] raise
+pub fn Faker::date_birthdate(Self, min? : Int, max? : Int, mode? : String, ref_date? : Int64) -> Int64 raise
+pub fn Faker::date_future(Self, years? : Int, min_years? : Int, ref_date? : Int64) -> Int64 raise
+pub fn Faker::date_month(Self, abbreviated? : Bool, context? : Bool) -> String raise
+pub fn Faker::date_past(Self, years? : Int, min_years? : Int, ref_date? : Int64) -> Int64 raise
+pub fn Faker::date_recent(Self, days? : Int, min_days? : Int, ref_date? : Int64) -> Int64 raise
+pub fn Faker::date_soon(Self, days? : Int, min_days? : Int, ref_date? : Int64) -> Int64 raise
 pub fn Faker::date_time_zone(Self) -> String raise
+pub fn Faker::date_weekday(Self, abbreviated? : Bool, context? : Bool) -> String raise
 pub fn Faker::definition(Self, String) -> Json raise
 pub fn Faker::fake(Self, String) -> String raise
 pub fn Faker::finance_currency(Self) -> Currency raise
@@ -150,6 +163,7 @@ pub fn Faker::hacker_phrase(Self) -> String raise
 pub fn Faker::hacker_verb(Self) -> String raise
 pub fn Faker::hexadecimal(Self, length? : Int, prefix? : String, casing? : Casing) -> String raise
 pub fn Faker::int(Self, min? : Int, max? : Int, multiple_of? : Int) -> Int raise
+pub fn Faker::int64(Self, min? : Int64, max? : Int64) -> Int64 raise
 pub fn Faker::internet_display_name(Self, first_name? : String, last_name? : String) -> String raise
 pub fn Faker::internet_domain_name(Self) -> String raise
 pub fn Faker::internet_domain_suffix(Self) -> String raise
@@ -242,6 +256,7 @@ pub fn Faker::science_chemical_element(Self) -> ChemicalElement raise
 pub fn Faker::science_unit(Self) -> ScienceUnit raise
 pub fn Faker::seed(Self, UInt) -> Unit
 pub fn Faker::seed_array(Self, ArrayView[UInt]) -> Unit
+pub fn Faker::set_default_ref_date(Self, Int64) -> Unit raise
 pub fn[T] Faker::shuffle(Self, ArrayView[T]) -> Array[T] raise
 pub fn Faker::string_sample(Self, length? : Int) -> String raise
 pub fn Faker::symbol(Self, length? : Int) -> String raise
