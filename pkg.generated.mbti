@@ -19,22 +19,36 @@ pub suberror FakerError {
 }
 
 // Types and methods
+pub(all) enum Casing {
+  Lower
+  Upper
+  Mixed
+}
+
 pub struct Faker {
   randomizer : @randomizer.Randomizer
   locales : Array[@locale.Locale]
 }
+pub fn Faker::alpha(Self, length? : Int, casing? : Casing, exclude? : String) -> String raise
+pub fn Faker::alphanumeric(Self, length? : Int, casing? : Casing, exclude? : String) -> String raise
 pub fn[T] Faker::array_element(Self, ArrayView[T]) -> T raise
 pub fn[T] Faker::array_elements(Self, ArrayView[T], count? : Int) -> Array[T] raise
 pub fn[T] Faker::array_samples(Self, ArrayView[T], count? : Int) -> Array[T] raise
+pub fn Faker::binary(Self, length? : Int, prefix? : String) -> String raise
 pub fn Faker::boolean(Self, probability? : Double) -> Bool raise
 pub fn Faker::definition(Self, String) -> Json raise
 pub fn Faker::float(Self, min? : Double, max? : Double, multiple_of? : Double, fraction_digits? : Int) -> Double raise
+pub fn Faker::from_characters(Self, String, length? : Int) -> String raise
+pub fn Faker::hexadecimal(Self, length? : Int, prefix? : String, casing? : Casing) -> String raise
 pub fn Faker::int(Self, min? : Int, max? : Int, multiple_of? : Int) -> Int raise
 pub fn[T] Faker::maybe(Self, () -> T raise, probability? : Double) -> T? raise
+pub fn Faker::nanoid(Self, length? : Int) -> String raise
 pub fn Faker::new(seed? : UInt, locales? : Array[@locale.Locale], randomizer? : @randomizer.Randomizer) -> Self
 pub fn Faker::number_binary(Self, min? : Int, max? : Int) -> String raise
 pub fn Faker::number_hex(Self, min? : Int, max? : Int) -> String raise
 pub fn Faker::number_octal(Self, min? : Int, max? : Int) -> String raise
+pub fn Faker::numeric(Self, length? : Int, allow_leading_zeros? : Bool, exclude? : String) -> String raise
+pub fn Faker::octal(Self, length? : Int, prefix? : String) -> String raise
 pub fn Faker::random(Self) -> Double
 pub fn Faker::replace_symbols(Self, String) -> String raise
 pub fn Faker::roman_numeral(Self, min? : Int, max? : Int) -> String raise
@@ -42,7 +56,12 @@ pub fn Faker::sample(Self, String) -> String raise
 pub fn Faker::seed(Self, UInt) -> Unit
 pub fn Faker::seed_array(Self, ArrayView[UInt]) -> Unit
 pub fn[T] Faker::shuffle(Self, ArrayView[T]) -> Array[T] raise
+pub fn Faker::string_sample(Self, length? : Int) -> String raise
+pub fn Faker::symbol(Self, length? : Int) -> String raise
+pub fn Faker::ulid(Self, Int64) -> String raise
 pub fn[T : Eq] Faker::unique_array(Self, ArrayView[T], Int) -> Array[T] raise
+pub fn Faker::uuid(Self) -> String raise
+pub fn Faker::uuid_v7(Self, Int64) -> String raise
 pub fn[T] Faker::weighted_array_element(Self, ArrayView[(Double, T)]) -> T raise
 
 // Type aliases

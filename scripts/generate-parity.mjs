@@ -32,3 +32,18 @@ fixtures('core_parity_test.mbt', [
  ['f.replace_symbols("##??**")', f => f.helpers.replaceSymbols('##??**')],
  ['f.roman_numeral()', f => f.number.romanNumeral()],
 ]);
+fixtures('string_parity_test.mbt', [
+ ['f.alpha(length=20)', f => f.string.alpha(20)],
+ ['f.alpha(length=20, casing=Upper, exclude="ABC")', f => f.string.alpha({length:20,casing:'upper',exclude:'ABC'})],
+ ['f.alphanumeric(length=20)', f => f.string.alphanumeric(20)],
+ ['f.numeric(length=20, allow_leading_zeros=false)', f => f.string.numeric({length:20,allowLeadingZeros:false})],
+ ['f.hexadecimal(length=20)', f => f.string.hexadecimal({length:20})],
+ ['f.binary(length=20)', f => f.string.binary({length:20})],
+ ['f.octal(length=20)', f => f.string.octal({length:20})],
+ ['f.symbol(length=20)', f => f.string.symbol(20)],
+ ['f.string_sample(length=20)', f => f.string.sample(20)],
+ ['f.nanoid()', f => f.string.nanoid()],
+ ['f.uuid()', f => f.string.uuid()],
+ ['f.uuid_v7(1577836800000L)', f => f.string.uuid({version:7,refDate:1577836800000})],
+ ['f.ulid(1577836800000L)', f => f.string.ulid({refDate:1577836800000})],
+]);
