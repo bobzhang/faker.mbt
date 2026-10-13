@@ -132,10 +132,11 @@ pub fn[T : Eq] unique_array_with(
   count : Int32,
 ) -> Array[T] {
   let unique : Array[T] = []
-  for _ in 0..<(1000 * count) {
-    if unique.length() >= count {
-      break
-    }
+  // Int64, because `1000 * count` overflows Int for large counts.
+  let limit = 1000L * count.to_int64()
+  for attempts = 0L
+      attempts < limit && unique.length() < count
+      attempts = attempts + 1 {
     let value = generate() catch { _ => break }
     if !unique.contains(value) {
       unique.push(value)
