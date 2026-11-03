@@ -5,6 +5,7 @@ import {
   "bobzhang/faker/locale",
   "bobzhang/faker/randomizer",
   "moonbitlang/core/bigint",
+  "moonbitlang/core/json",
 }
 
 // Values
@@ -18,7 +19,7 @@ pub fn exponential_distributor(base? : Double, bias? : Double) -> ((&@randomizer
 
 pub fn luhn_valid(String) -> Bool
 
-pub fn[T] multiple((Int) -> T raise, count? : Int) -> Array[T] raise
+pub fn[T] multiple((Int32) -> T raise, count? : Int32) -> Array[T] raise
 
 pub fn mustache(String, Map[String, () -> String raise]) -> String raise
 
@@ -26,7 +27,7 @@ pub fn slugify(String) -> String
 
 pub fn uniform_distributor() -> (&@randomizer.RandomSource) -> Double
 
-pub fn[T : Eq] unique_array_with(() -> T raise, Int) -> Array[T]
+pub fn[T : Eq] unique_array_with(() -> T raise, Int32) -> Array[T]
 
 // Errors
 pub suberror FakerError {
@@ -36,23 +37,26 @@ pub suberror FakerError {
 }
 
 // Types and methods
+#derive(@json.ToJson)
 pub struct Airline {
   name : String
   iata_code : String
-} derive(ToJson)
-pub fn Airline::to_json(Self) -> Json
+}
+pub fn Airline::to_json(Self) -> @json.Json
 
+#derive(@json.ToJson)
 pub struct Airplane {
   name : String
   iata_type_code : String
-} derive(ToJson)
-pub fn Airplane::to_json(Self) -> Json
+}
+pub fn Airplane::to_json(Self) -> @json.Json
 
+#derive(@json.ToJson)
 pub struct Airport {
   name : String
   iata_code : String
-} derive(ToJson)
-pub fn Airport::to_json(Self) -> Json
+}
+pub fn Airport::to_json(Self) -> @json.Json
 
 pub(all) enum Casing {
   Lower
@@ -60,37 +64,39 @@ pub(all) enum Casing {
   Mixed
 }
 
+#derive(@json.ToJson)
 pub struct ChemicalElement {
   symbol : String
   name : String
-  atomic_number : Int
-} derive(ToJson)
-pub fn ChemicalElement::to_json(Self) -> Json
+  atomic_number : Int32
+}
+pub fn ChemicalElement::to_json(Self) -> @json.Json
 
+#derive(@json.ToJson)
 pub struct Currency {
   name : String
   code : String
   symbol : String
   numeric_code : String
-} derive(ToJson)
-pub fn Currency::to_json(Self) -> Json
+}
+pub fn Currency::to_json(Self) -> @json.Json
 
 pub struct Faker {
   randomizer : &@randomizer.RandomSource
   locales : Array[@locale.Locale]
-  mut template_depth : Int
+  mut template_depth : Int32
   mut ref_date : Int64
 }
-pub fn Faker::Faker(seed? : UInt, locales? : Array[@locale.Locale], randomizer? : &@randomizer.RandomSource) -> Self
+pub fn Faker::Faker(seed? : UInt32, locales? : Array[@locale.Locale], randomizer? : &@randomizer.RandomSource) -> Self
 pub fn Faker::airline_aircraft_type(Self) -> String raise
 pub fn Faker::airline_airline(Self) -> Airline raise
 pub fn Faker::airline_airplane(Self) -> Airplane raise
 pub fn Faker::airline_airport(Self) -> Airport raise
-pub fn Faker::airline_flight_number(Self, length? : Int, add_leading_zeros? : Bool) -> String raise
+pub fn Faker::airline_flight_number(Self, length? : Int32, add_leading_zeros? : Bool) -> String raise
 pub fn Faker::airline_record_locator(Self, allow_numerics? : Bool, allow_visually_similar? : Bool) -> String raise
 pub fn Faker::airline_seat(Self, aircraft_type? : String) -> String raise
-pub fn Faker::alpha(Self, length? : Int, casing? : Casing, exclude? : String) -> String raise
-pub fn Faker::alphanumeric(Self, length? : Int, casing? : Casing, exclude? : String) -> String raise
+pub fn Faker::alpha(Self, length? : Int32, casing? : Casing, exclude? : String) -> String raise
+pub fn Faker::alphanumeric(Self, length? : Int32, casing? : Casing, exclude? : String) -> String raise
 pub fn Faker::animal_bear(Self) -> String raise
 pub fn Faker::animal_bird(Self) -> String raise
 pub fn Faker::animal_cat(Self) -> String raise
@@ -108,10 +114,10 @@ pub fn Faker::animal_rodent(Self) -> String raise
 pub fn Faker::animal_snake(Self) -> String raise
 pub fn Faker::animal_type(Self) -> String raise
 pub fn[T] Faker::array_element(Self, ArrayView[T]) -> T raise
-pub fn[T] Faker::array_elements(Self, ArrayView[T], count? : Int) -> Array[T] raise
-pub fn[T] Faker::array_samples(Self, ArrayView[T], count? : Int) -> Array[T] raise
+pub fn[T] Faker::array_elements(Self, ArrayView[T], count? : Int32) -> Array[T] raise
+pub fn[T] Faker::array_samples(Self, ArrayView[T], count? : Int32) -> Array[T] raise
 pub fn Faker::big_int(Self, min? : @bigint.BigInt, max? : @bigint.BigInt, multiple_of? : @bigint.BigInt) -> @bigint.BigInt raise
-pub fn Faker::binary(Self, length? : Int, prefix? : String) -> String raise
+pub fn Faker::binary(Self, length? : Int32, prefix? : String) -> String raise
 pub fn Faker::book_author(Self) -> String raise
 pub fn Faker::book_format(Self) -> String raise
 pub fn Faker::book_genre(Self) -> String raise
@@ -132,8 +138,8 @@ pub fn Faker::color_rgb(Self, include_alpha? : Bool, prefix? : String, casing? :
 pub fn Faker::color_rgb_channels(Self, include_alpha? : Bool) -> Array[Double] raise
 pub fn Faker::color_space(Self) -> String raise
 pub fn Faker::commerce_department(Self) -> String raise
-pub fn Faker::commerce_isbn(Self, variant? : Int, separator? : String) -> String raise
-pub fn Faker::commerce_price(Self, min? : Double, max? : Double, decimals? : Int, symbol? : String) -> String raise
+pub fn Faker::commerce_isbn(Self, variant? : Int32, separator? : String) -> String raise
+pub fn Faker::commerce_price(Self, min? : Double, max? : Double, decimals? : Int32, symbol? : String) -> String raise
 pub fn Faker::commerce_product(Self) -> String raise
 pub fn Faker::commerce_product_adjective(Self) -> String raise
 pub fn Faker::commerce_product_description(Self) -> String raise
@@ -156,21 +162,21 @@ pub fn Faker::database_mongodb_object_id(Self) -> String raise
 pub fn Faker::database_type(Self) -> String raise
 pub fn Faker::date_anytime(Self, ref_date? : Int64) -> Int64 raise
 pub fn Faker::date_between(Self, Int64, Int64) -> Int64 raise
-pub fn Faker::date_betweens(Self, Int64, Int64, count? : Int) -> Array[Int64] raise
-pub fn Faker::date_birthdate(Self, min? : Int, max? : Int, mode? : String, ref_date? : Int64) -> Int64 raise
-pub fn Faker::date_future(Self, years? : Int, min_years? : Int, ref_date? : Int64) -> Int64 raise
+pub fn Faker::date_betweens(Self, Int64, Int64, count? : Int32) -> Array[Int64] raise
+pub fn Faker::date_birthdate(Self, min? : Int32, max? : Int32, mode? : String, ref_date? : Int64) -> Int64 raise
+pub fn Faker::date_future(Self, years? : Int32, min_years? : Int32, ref_date? : Int64) -> Int64 raise
 pub fn Faker::date_month(Self, abbreviated? : Bool, context? : Bool) -> String raise
-pub fn Faker::date_past(Self, years? : Int, min_years? : Int, ref_date? : Int64) -> Int64 raise
-pub fn Faker::date_recent(Self, days? : Int, min_days? : Int, ref_date? : Int64) -> Int64 raise
-pub fn Faker::date_soon(Self, days? : Int, min_days? : Int, ref_date? : Int64) -> Int64 raise
+pub fn Faker::date_past(Self, years? : Int32, min_years? : Int32, ref_date? : Int64) -> Int64 raise
+pub fn Faker::date_recent(Self, days? : Int32, min_days? : Int32, ref_date? : Int64) -> Int64 raise
+pub fn Faker::date_soon(Self, days? : Int32, min_days? : Int32, ref_date? : Int64) -> Int64 raise
 pub fn Faker::date_time_zone(Self) -> String raise
 pub fn Faker::date_weekday(Self, abbreviated? : Bool, context? : Bool) -> String raise
-pub fn Faker::definition(Self, String) -> Json raise
+pub fn Faker::definition(Self, String) -> @json.Json raise
 pub fn[T] Faker::enum_value(Self, ArrayView[T]) -> T raise
 pub fn Faker::fake(Self, String) -> String raise
 pub fn Faker::finance_account_name(Self) -> String raise
-pub fn Faker::finance_account_number(Self, length? : Int) -> String raise
-pub fn Faker::finance_amount(Self, min? : Double, max? : Double, decimals? : Int, symbol? : String) -> String raise
+pub fn Faker::finance_account_number(Self, length? : Int32) -> String raise
+pub fn Faker::finance_amount(Self, min? : Double, max? : Double, decimals? : Int32, symbol? : String) -> String raise
 pub fn Faker::finance_bic(Self, include_branch_code? : Bool) -> String raise
 pub fn Faker::finance_bitcoin_address(Self, family? : String, testnet? : Bool) -> String raise
 pub fn Faker::finance_credit_card_cvv(Self) -> String raise
@@ -184,12 +190,12 @@ pub fn Faker::finance_currency_symbol(Self) -> String raise
 pub fn Faker::finance_ethereum_address(Self) -> String raise
 pub fn Faker::finance_iban(Self, country_code? : String, formatted? : Bool) -> String raise
 pub fn Faker::finance_litecoin_address(Self) -> String raise
-pub fn Faker::finance_pin(Self, length? : Int) -> String raise
+pub fn Faker::finance_pin(Self, length? : Int32) -> String raise
 pub fn Faker::finance_routing_number(Self) -> String raise
 pub fn Faker::finance_transaction_description(Self) -> String raise
 pub fn Faker::finance_transaction_type(Self) -> String raise
 pub fn Faker::finance_vat_number(Self, country_code? : String) -> String raise
-pub fn Faker::float(Self, min? : Double, max? : Double, multiple_of? : Double, fraction_digits? : Int, distributor? : (&@randomizer.RandomSource) -> Double) -> Double raise
+pub fn Faker::float(Self, min? : Double, max? : Double, multiple_of? : Double, fraction_digits? : Int32, distributor? : (&@randomizer.RandomSource) -> Double) -> Double raise
 pub fn Faker::food_adjective(Self) -> String raise
 pub fn Faker::food_description(Self) -> String raise
 pub fn Faker::food_dish(Self) -> String raise
@@ -199,28 +205,28 @@ pub fn Faker::food_ingredient(Self) -> String raise
 pub fn Faker::food_meat(Self) -> String raise
 pub fn Faker::food_spice(Self) -> String raise
 pub fn Faker::food_vegetable(Self) -> String raise
-pub fn Faker::from_characters(Self, String, length? : Int) -> String raise
+pub fn Faker::from_characters(Self, String, length? : Int32) -> String raise
 pub fn Faker::from_reg_exp(Self, String, ignore_case? : Bool) -> String raise
 pub fn Faker::git_branch(Self) -> String raise
 pub fn Faker::git_commit_date(Self, ref_date? : Int64) -> String raise
 pub fn Faker::git_commit_entry(Self, merge? : Bool, eol? : String, ref_date? : Int64) -> String raise
 pub fn Faker::git_commit_message(Self) -> String raise
-pub fn Faker::git_commit_sha(Self, length? : Int) -> String raise
+pub fn Faker::git_commit_sha(Self, length? : Int32) -> String raise
 pub fn Faker::hacker_abbreviation(Self) -> String raise
 pub fn Faker::hacker_adjective(Self) -> String raise
 pub fn Faker::hacker_ingverb(Self) -> String raise
 pub fn Faker::hacker_noun(Self) -> String raise
 pub fn Faker::hacker_phrase(Self) -> String raise
 pub fn Faker::hacker_verb(Self) -> String raise
-pub fn Faker::hexadecimal(Self, length? : Int, prefix? : String, casing? : Casing) -> String raise
+pub fn Faker::hexadecimal(Self, length? : Int32, prefix? : String, casing? : Casing) -> String raise
 pub fn Faker::image_avatar(Self) -> String raise
 pub fn Faker::image_avatar_git_hub(Self) -> String raise
-pub fn Faker::image_data_uri(Self, width? : Int, height? : Int, color? : String, base64? : Bool) -> String raise
-pub fn Faker::image_person_portrait(Self, size? : Int, sex? : Sex) -> String raise
-pub fn Faker::image_url(Self, width? : Int, height? : Int) -> String raise
-pub fn Faker::image_url_lorem_flickr(Self, width? : Int, height? : Int, category? : String) -> String raise
-pub fn Faker::image_url_picsum_photos(Self, width? : Int, height? : Int, grayscale? : Bool, blur? : Int) -> String raise
-pub fn Faker::int(Self, min? : Int, max? : Int, multiple_of? : Int, distributor? : (&@randomizer.RandomSource) -> Double) -> Int raise
+pub fn Faker::image_data_uri(Self, width? : Int32, height? : Int32, color? : String, base64? : Bool) -> String raise
+pub fn Faker::image_person_portrait(Self, size? : Int32, sex? : Sex) -> String raise
+pub fn Faker::image_url(Self, width? : Int32, height? : Int32) -> String raise
+pub fn Faker::image_url_lorem_flickr(Self, width? : Int32, height? : Int32, category? : String) -> String raise
+pub fn Faker::image_url_picsum_photos(Self, width? : Int32, height? : Int32, grayscale? : Bool, blur? : Int32) -> String raise
+pub fn Faker::int(Self, min? : Int32, max? : Int32, multiple_of? : Int32, distributor? : (&@randomizer.RandomSource) -> Double) -> Int32 raise
 pub fn Faker::int64(Self, min? : Int64, max? : Int64) -> Int64 raise
 pub fn Faker::internet_display_name(Self, first_name? : String, last_name? : String) -> String raise
 pub fn Faker::internet_domain_name(Self) -> String raise
@@ -230,15 +236,15 @@ pub fn Faker::internet_email(Self, first_name? : String, last_name? : String, pr
 pub fn Faker::internet_emoji(Self, types? : Array[String]) -> String raise
 pub fn Faker::internet_example_email(Self, first_name? : String, last_name? : String, allow_special_characters? : Bool) -> String raise
 pub fn Faker::internet_http_method(Self) -> String raise
-pub fn Faker::internet_http_status_code(Self, types? : Array[String]) -> Int raise
+pub fn Faker::internet_http_status_code(Self, types? : Array[String]) -> Int32 raise
 pub fn Faker::internet_ip(Self) -> String raise
 pub fn Faker::internet_ipv4(Self, cidr? : String, network? : String) -> String raise
 pub fn Faker::internet_ipv6(Self) -> String raise
-pub fn Faker::internet_jwt(Self, header? : Json, payload? : Json, ref_date? : Int64) -> String raise
+pub fn Faker::internet_jwt(Self, header? : @json.Json, payload? : @json.Json, ref_date? : Int64) -> String raise
 pub fn Faker::internet_jwt_algorithm(Self) -> String raise
 pub fn Faker::internet_mac(Self, separator? : String) -> String raise
-pub fn Faker::internet_password(Self, length? : Int, memorable? : Bool, prefix? : String) -> String raise
-pub fn Faker::internet_port(Self) -> Int raise
+pub fn Faker::internet_password(Self, length? : Int32, memorable? : Bool, prefix? : String) -> String raise
+pub fn Faker::internet_port(Self) -> Int32 raise
 pub fn Faker::internet_protocol(Self) -> String raise
 pub fn Faker::internet_url(Self, protocol? : String, append_slash? : Bool) -> String raise
 pub fn Faker::internet_user_agent(Self) -> String raise
@@ -252,8 +258,8 @@ pub fn Faker::location_country_code(Self, variant? : String) -> String raise
 pub fn Faker::location_county(Self) -> String raise
 pub fn Faker::location_direction(Self, abbreviated? : Bool) -> String raise
 pub fn Faker::location_language(Self) -> Language raise
-pub fn Faker::location_latitude(Self, min? : Double, max? : Double, precision? : Int) -> Double raise
-pub fn Faker::location_longitude(Self, min? : Double, max? : Double, precision? : Int) -> Double raise
+pub fn Faker::location_latitude(Self, min? : Double, max? : Double, precision? : Int32) -> Double raise
+pub fn Faker::location_longitude(Self, min? : Double, max? : Double, precision? : Int32) -> Double raise
 pub fn Faker::location_nearby_gps_coordinate(Self, origin? : (Double, Double), radius? : Double, metric? : Bool) -> (Double, Double) raise
 pub fn Faker::location_ordinal_direction(Self, abbreviated? : Bool) -> String raise
 pub fn Faker::location_postal_address(Self) -> String raise
@@ -263,15 +269,15 @@ pub fn Faker::location_street(Self) -> String raise
 pub fn Faker::location_street_address(Self, full? : Bool) -> String raise
 pub fn Faker::location_time_zone(Self) -> String raise
 pub fn Faker::location_zip_code(Self, format? : String, state? : String) -> String raise
-pub fn Faker::lorem_lines(Self, count? : Int) -> String raise
-pub fn Faker::lorem_paragraph(Self, count? : Int) -> String raise
-pub fn Faker::lorem_paragraphs(Self, count? : Int, separator? : String) -> String raise
-pub fn Faker::lorem_sentence(Self, count? : Int) -> String raise
-pub fn Faker::lorem_sentences(Self, count? : Int, separator? : String) -> String raise
-pub fn Faker::lorem_slug(Self, count? : Int) -> String raise
+pub fn Faker::lorem_lines(Self, count? : Int32) -> String raise
+pub fn Faker::lorem_paragraph(Self, count? : Int32) -> String raise
+pub fn Faker::lorem_paragraphs(Self, count? : Int32, separator? : String) -> String raise
+pub fn Faker::lorem_sentence(Self, count? : Int32) -> String raise
+pub fn Faker::lorem_sentences(Self, count? : Int32, separator? : String) -> String raise
+pub fn Faker::lorem_slug(Self, count? : Int32) -> String raise
 pub fn Faker::lorem_text(Self) -> String raise
-pub fn Faker::lorem_word(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
-pub fn Faker::lorem_words(Self, count? : Int) -> String raise
+pub fn Faker::lorem_word(Self, min_length? : Int32, max_length? : Int32, strategy? : LengthStrategy) -> String raise
+pub fn Faker::lorem_words(Self, count? : Int32) -> String raise
 pub fn[T] Faker::maybe(Self, () -> T raise, probability? : Double) -> T? raise
 pub fn Faker::medical_allergen(Self) -> String raise
 pub fn Faker::medical_blood_type(Self) -> String raise
@@ -285,15 +291,15 @@ pub fn Faker::music_album(Self) -> String raise
 pub fn Faker::music_artist(Self) -> String raise
 pub fn Faker::music_genre(Self) -> String raise
 pub fn Faker::music_song_name(Self) -> String raise
-pub fn Faker::nanoid(Self, length? : Int) -> String raise
-pub fn Faker::number_binary(Self, min? : Int, max? : Int) -> String raise
-pub fn Faker::number_hex(Self, min? : Int, max? : Int) -> String raise
-pub fn Faker::number_octal(Self, min? : Int, max? : Int) -> String raise
-pub fn Faker::numeric(Self, length? : Int, allow_leading_zeros? : Bool, exclude? : String) -> String raise
+pub fn Faker::nanoid(Self, length? : Int32) -> String raise
+pub fn Faker::number_binary(Self, min? : Int32, max? : Int32) -> String raise
+pub fn Faker::number_hex(Self, min? : Int32, max? : Int32) -> String raise
+pub fn Faker::number_octal(Self, min? : Int32, max? : Int32) -> String raise
+pub fn Faker::numeric(Self, length? : Int32, allow_leading_zeros? : Bool, exclude? : String) -> String raise
 pub fn[T] Faker::object_entry(Self, Map[String, T]) -> (String, T) raise
 pub fn[T] Faker::object_key(Self, Map[String, T]) -> String raise
 pub fn[T] Faker::object_value(Self, Map[String, T]) -> T raise
-pub fn Faker::octal(Self, length? : Int, prefix? : String) -> String raise
+pub fn Faker::octal(Self, length? : Int32, prefix? : String) -> String raise
 pub fn Faker::person_bio(Self) -> String raise
 pub fn Faker::person_first_name(Self, sex? : Sex) -> String raise
 pub fn Faker::person_full_name(Self, first_name? : String, last_name? : String, sex? : Sex) -> String raise
@@ -312,33 +318,33 @@ pub fn Faker::person_zodiac_sign(Self) -> String raise
 pub fn Faker::phone_imei(Self) -> String raise
 pub fn Faker::phone_number(Self, style? : String) -> String raise
 pub fn Faker::random(Self) -> Double
-pub fn Faker::range_to_number(Self, NumberOrRange) -> Int raise
+pub fn Faker::range_to_number(Self, NumberOrRange) -> Int32 raise
 pub fn Faker::replace_credit_card_symbols(Self, pattern? : String, symbol? : Char) -> String raise
 pub fn Faker::replace_symbols(Self, String) -> String raise
-pub fn Faker::roman_numeral(Self, min? : Int, max? : Int) -> String raise
+pub fn Faker::roman_numeral(Self, min? : Int32, max? : Int32) -> String raise
 pub fn Faker::sample(Self, String) -> String raise
 pub fn Faker::science_chemical_element(Self) -> ChemicalElement raise
 pub fn Faker::science_unit(Self) -> ScienceUnit raise
-pub fn Faker::seed(Self, UInt) -> Unit
-pub fn Faker::seed_array(Self, ArrayView[UInt]) -> Unit
+pub fn Faker::seed(Self, UInt32) -> Unit
+pub fn Faker::seed_array(Self, ArrayView[UInt32]) -> Unit
 pub fn Faker::set_default_ref_date(Self, Int64) -> Unit raise
 pub fn[T] Faker::shuffle(Self, ArrayView[T]) -> Array[T] raise
-pub fn Faker::string_sample(Self, length? : Int) -> String raise
-pub fn Faker::symbol(Self, length? : Int) -> String raise
+pub fn Faker::string_sample(Self, length? : Int32) -> String raise
+pub fn Faker::symbol(Self, length? : Int32) -> String raise
 pub fn Faker::system_common_file_ext(Self) -> String raise
 pub fn Faker::system_common_file_name(Self, extension? : String) -> String raise
 pub fn Faker::system_common_file_type(Self) -> String raise
 pub fn Faker::system_cron(Self, include_year? : Bool, include_non_standard? : Bool) -> String raise
 pub fn Faker::system_directory_path(Self) -> String raise
 pub fn Faker::system_file_ext(Self, mime_type? : String) -> String raise
-pub fn Faker::system_file_name(Self, extension_count? : Int) -> String raise
+pub fn Faker::system_file_name(Self, extension_count? : Int32) -> String raise
 pub fn Faker::system_file_path(Self) -> String raise
 pub fn Faker::system_file_type(Self) -> String raise
 pub fn Faker::system_mime_type(Self) -> String raise
 pub fn Faker::system_network_interface(Self, interface_type? : String, schema? : String) -> String raise
 pub fn Faker::system_semver(Self) -> String raise
 pub fn Faker::ulid(Self, Int64) -> String raise
-pub fn[T : Eq] Faker::unique_array(Self, ArrayView[T], Int) -> Array[T] raise
+pub fn[T : Eq] Faker::unique_array(Self, ArrayView[T], Int32) -> Array[T] raise
 pub fn Faker::uuid(Self) -> String raise
 pub fn Faker::uuid_v7(Self, Int64) -> String raise
 pub fn Faker::vehicle_bicycle(Self) -> String raise
@@ -351,22 +357,23 @@ pub fn Faker::vehicle_vehicle(Self) -> String raise
 pub fn Faker::vehicle_vin(Self) -> String raise
 pub fn Faker::vehicle_vrm(Self) -> String raise
 pub fn[T] Faker::weighted_array_element(Self, ArrayView[(Double, T)]) -> T raise
-pub fn Faker::word_adjective(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
-pub fn Faker::word_adverb(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
-pub fn Faker::word_conjunction(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
-pub fn Faker::word_interjection(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
-pub fn Faker::word_noun(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
-pub fn Faker::word_preposition(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
-pub fn Faker::word_sample(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
-pub fn Faker::word_verb(Self, min_length? : Int, max_length? : Int, strategy? : LengthStrategy) -> String raise
-pub fn Faker::word_words(Self, count? : Int) -> String raise
+pub fn Faker::word_adjective(Self, min_length? : Int32, max_length? : Int32, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_adverb(Self, min_length? : Int32, max_length? : Int32, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_conjunction(Self, min_length? : Int32, max_length? : Int32, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_interjection(Self, min_length? : Int32, max_length? : Int32, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_noun(Self, min_length? : Int32, max_length? : Int32, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_preposition(Self, min_length? : Int32, max_length? : Int32, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_sample(Self, min_length? : Int32, max_length? : Int32, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_verb(Self, min_length? : Int32, max_length? : Int32, strategy? : LengthStrategy) -> String raise
+pub fn Faker::word_words(Self, count? : Int32) -> String raise
 
+#derive(@json.ToJson)
 pub struct Language {
   name : String
   alpha2 : String
   alpha3 : String
-} derive(ToJson)
-pub fn Language::to_json(Self) -> Json
+}
+pub fn Language::to_json(Self) -> @json.Json
 
 pub(all) enum LengthStrategy {
   Fail
@@ -377,15 +384,16 @@ pub(all) enum LengthStrategy {
 }
 
 pub(all) enum NumberOrRange {
-  Fixed(Int)
-  Range(min~ : Int, max~ : Int)
+  Fixed(Int32)
+  Range(min~ : Int32, max~ : Int32)
 }
 
+#derive(@json.ToJson)
 pub struct ScienceUnit {
   name : String
   symbol : String
-} derive(ToJson)
-pub fn ScienceUnit::to_json(Self) -> Json
+}
+pub fn ScienceUnit::to_json(Self) -> @json.Json
 
 pub(all) enum Sex {
   Female

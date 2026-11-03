@@ -18,12 +18,13 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
+        moonbit: [latest, pre-release]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v5
       - name: Install MoonBit
         run: |
-          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- "${{ matrix.moonbit }}"
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
       - run: moon version --all
       - name: Check
@@ -40,6 +41,10 @@ jobs:
   # Regenerate every generated file from the pinned upstream checkout and fail
   # if the committed copies have drifted.
   upstream-parity:
+    strategy:
+      fail-fast: false
+      matrix:
+        moonbit: [latest, pre-release]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -56,7 +61,7 @@ jobs:
           node-version: 25
       - name: Install MoonBit
         run: |
-          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- "${{ matrix.moonbit }}"
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
       - name: Regenerate
         run: |
