@@ -1,6 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "bobzhang/faker/locale"
 
+import {
+  "moonbitlang/core/json",
+}
+
 // Values
 pub fn merge(ArrayView[Locale]) -> Locale
 
@@ -8,10 +12,10 @@ pub fn merge(ArrayView[Locale]) -> Locale
 
 // Types and methods
 pub struct Locale {
-  data : Json
+  data : @json.Json
 }
-pub fn Locale::from_json(Json) -> Self
-pub fn Locale::get(Self, String) -> Json?
+pub fn Locale::from_json(@json.Json) -> Self
+pub fn Locale::get(Self, String) -> @json.Json?
 pub fn Locale::parse(String) -> Self raise
 
 // Type aliases

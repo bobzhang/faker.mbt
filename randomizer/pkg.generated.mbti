@@ -7,16 +7,16 @@ package "bobzhang/faker/randomizer"
 
 // Types and methods
 pub struct Randomizer {
-  state : FixedArray[UInt]
-  mut index : Int
+  state : FixedArray[UInt32]
+  mut index : Int32
   precision32 : Bool
 }
-pub fn Randomizer::Randomizer(seed? : UInt, precision32? : Bool) -> Self
+pub fn Randomizer::Randomizer(seed? : UInt32, precision32? : Bool) -> Self
 pub fn Randomizer::next(Self) -> Double
 pub fn Randomizer::next_f32(Self) -> Double
-pub fn Randomizer::next_u32(Self) -> UInt
-pub fn Randomizer::seed(Self, UInt) -> Unit
-pub fn Randomizer::seed_array(Self, ArrayView[UInt]) -> Unit
+pub fn Randomizer::next_u32(Self) -> UInt32
+pub fn Randomizer::seed(Self, UInt32) -> Unit
+pub fn Randomizer::seed_array(Self, ArrayView[UInt32]) -> Unit
 pub impl RandomSource for Randomizer
 
 // Type aliases
@@ -24,6 +24,6 @@ pub impl RandomSource for Randomizer
 // Traits
 pub(open) trait RandomSource {
   fn next(Self) -> Double
-  fn seed(Self, UInt) -> Unit
-  fn seed_array(Self, ArrayView[UInt]) -> Unit
+  fn seed(Self, UInt32) -> Unit
+  fn seed_array(Self, ArrayView[UInt32]) -> Unit
 }
