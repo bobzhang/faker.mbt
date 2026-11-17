@@ -177,9 +177,12 @@ pub fn Faker::big_int(
     return low * multiple_of
   }
   let delta = high - low + 1N
-  let offset = @bigint.BigInt::from_string(
+  let offset = (@string.parse_bigint(
       self.numeric(length=delta.to_string().length()),
-    ) %
+    ) catch {
+      Failure(msg) => abort(msg)
+      _ => abort("invalid syntax")
+    }) %
     delta
   (low + offset) * multiple_of
 }

@@ -7,6 +7,7 @@ import {
   "bobzhang/faker/locales/base",
   "moonbitlang/core/math",
   "moonbitlang/core/bigint",
+  "moonbitlang/core/string",
   "moonbitlang/core/encoding/utf8",
   "moonbitlang/core/encoding/base64",
   "moonbitlang/core/json",
